@@ -23,11 +23,11 @@ BOARD_EGL_CFG := device/sony/rhine-common/rootdir/system/lib/egl/egl.cfg
 TARGET_SPECIFIC_HEADER_PATH := device/sony/rhine-common/include
 
 # Kernel properties
-TARGET_KERNEL_SOURCE := kernel/sony/msm8x74
+TARGET_KERNEL_SOURCE := kernel/sony/msm8974
 
 # Platform
-TARGET_BOOTLOADER_BOARD_NAME := MSM8x74
-TARGET_BOARD_PLATFORM := msm8x74
+TARGET_BOOTLOADER_BOARD_NAME := MSM8974
+TARGET_BOARD_PLATFORM := msm8974
 BOARD_VENDOR_PLATFORM := rhine
 
 BOARD_LIB_DUMPSTATE := libdumpstate.sony
