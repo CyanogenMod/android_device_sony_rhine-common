@@ -49,7 +49,7 @@ TARGET_KRAIT_BIONIC_PLDSIZE   := 64
 # Kernel information
 BOARD_KERNEL_BASE     := 0x00008000
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_KERNEL_CMDLINE  := androidboot.hardware=qcom user_debug=31 maxcpus=2 msm_rtb.filter=0x3F ehci-hcd.park=3 msm_rtb.enable=0 lpj=192598 dwc3.maximum_speed=high dwc3_msm.prop_chg_detect=Y vmalloc=400M androidboot.emmc=true androidboot.bootloader=s1 oemandroidboot.s1boot=1270-3115_S1_Boot_MSM8974_LA1.0_56 ta_info=1,16,256 startup=0x00008001 warmboot=0x776655aa androidboot.baseband=msm
+BOARD_KERNEL_CMDLINE  := androidboot.hardware=qcom user_debug=31 maxcpus=2 msm_rtb.filter=0x3F ehci-hcd.park=3 msm_rtb.enable=0 lpj=192598 dwc3.maximum_speed=high dwc3_msm.prop_chg_detect=Y
 BOARD_MKBOOTIMG_ARGS  := --ramdisk_offset 0x02000000
 
 # Wifi
