@@ -42,6 +42,30 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.google.android.nfc_extras.xml
 
+# GPS
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/system/etc/gps.conf:system/etc/gps.conf \
+    $(COMMON_PATH)/rootdir/system/etc/sec_config:system/etc/sec_config
+
+# WPA supplicant config
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/system/etc/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
+
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/fstab.qcom:root/fstab.qcom \
+    $(COMMON_PATH)/rootdir/fstab.qcom:recovery/root/fstab.qcom
+
+# Prima wifi config
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini
+
+
+# QCOM Display
+PRODUCT_PACKAGES += \
+    hwcomposer.msm8974 \
+    gralloc.msm8974 \
+    copybit.msm8974
+
 # NFC Support
 PRODUCT_PACKAGES += \
     libnfc \
@@ -50,9 +74,61 @@ PRODUCT_PACKAGES += \
     Tag \
     com.android.nfc_extras
 
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml
+
+# NFCEE access control
+ifeq ($(TARGET_BUILD_VARIANT),user)
+    NFCEE_ACCESS_PATH := $(COMMON_PATH)/rootdir/system/etc/nfcee_access.xml
+else
+    NFCEE_ACCESS_PATH := $(COMMON_PATH)/rootdir/system/etc/nfcee_access_debug.xml
+endif
+
+PRODUCT_COPY_FILES += \
+    $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml
+
 # Recovery
 PRODUCT_PACKAGES += \
     extract_elf_ramdisk
+
+# Audio
+PRODUCT_PACKAGES += \
+    alsa.msm8974 \
+    audio_policy.msm8974 \
+    audio.primary.msm8974 \
+    audio.a2dp.default \
+    audio.usb.default \
+    audio.r_submix.default \
+    libaudio-resampler \
+    tinymix
+
+# BT
+PRODUCT_PACKAGES += \
+    hci_qcomm_init
+
+# Media
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/system/etc/media_profiles.xml:system/etc/media_profiles.xml
+
+# Light
+PRODUCT_PACKAGES += \
+    lights.msm8974
+
+# Sensors
+PRODUCT_PACKAGES += \
+    sensors.default
+
+# WIFI MAC update
+PRODUCT_PACKAGES += \
+    mac-update
+
+# FM Radio
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/system/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh \
+    frameworks/native/data/etc/com.stericsson.hardware.fm.receiver.xml:system/etc/permissions/com.stericsson.hardware.fm.receiver.xml
+
+PRODUCT_PACKAGES += \
+    FmRadio
 
 # Key layouts
 PRODUCT_COPY_FILES += \
@@ -95,9 +171,32 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/sbin/wait4tad_static:root/sbin/wait4tad_static \
     $(COMMON_PATH)/rootdir/sbin/tad_static:root/sbin/tad_static
 
+# Thermal monitor configuration
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/system/etc/thermald.conf:system/etc/thermald.conf
+
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
+
+# GPS
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.gps.qmienabled=true
+
+# Audio
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.audio.handset.mic=analog \
+    persist.audio.hp=true \
+    ro.qc.sdk.audio.fluencetype=none \
+    lpa.decode=false \
+    lpa.use-stagefright=true \
+    tunnel.decode=true \
+    tunnel.audiovideo.decode=true \
+    tunnel.multiple=true
+
+# Bluetooth
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qualcomm.bt.hci_transport=smd
 
 # Include non-opensource parts
 $(call inherit-product, vendor/sony/rhine-common/rhine-common-vendor.mk)

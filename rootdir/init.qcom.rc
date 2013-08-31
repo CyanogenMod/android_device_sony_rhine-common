@@ -44,21 +44,34 @@ on init
     symlink /storage/usbdisk /mnt/usbdisk
 
     symlink /dev/socket /tmp
+    chmod 0664 /proc/rdtag
+    chown root system /proc/rdtag
 
     mkdir /dev/bus 0755 root root
     mkdir /dev/bus/usb 0755 root root
 
-    write /sys/module/subsystem_restart/parameters/restart_level 3
-    write /sys/module/subsystem_restart/parameters/max_restarts 8
-    write /sys/module/subsystem_restart/parameters/max_history_time 3600
+    # create directory for scd
+    mkdir /dev/socket/scd 0755 system system
+
+    # Enable ramdumps from subsystems to dump
+    # Should be initialized during init
+    write /sys/bus/msm_subsys/devices/subsys0/restart_level "RELATED"
+    write /sys/bus/msm_subsys/devices/subsys1/restart_level "RELATED"
+    write /sys/bus/msm_subsys/devices/subsys2/restart_level "RELATED"
+    write /sys/bus/msm_subsys/devices/subsys3/restart_level "RELATED"
+
+    # Enable panic on out of memory
+    write /proc/sys/vm/panic_on_oom 2
 
 on fs
     mount_all ./fstab.qcom
     setprop ro.crypto.fuse_sdcard true
 
     mkdir /lta-label 0555 system system
-    wait /dev/block/platform/msm_sdcc.1/by-name/LTALabel
-    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/LTALabel /lta-label nosuid nodev noatime noexec ro barrier=0
+#    wait /dev/block/platform/msm_sdcc.1/by-name/LTALabel
+#    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/LTALabel /lta-label nosuid nodev noatime noexec ro barrier=0
+    wait /dev/block/mmcblk0p18
+    mount ext4 /dev/block/mmcblk0p18 /lta-label nosuid nodev noatime noexec ro barrier=0
     chown system system /lta-label
     chmod 0555 /lta-label
 
@@ -71,25 +84,23 @@ on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
 
-    # Permissions for AKM897x sensor
-    chown system system /data/misc/akm_set.txt
-
     # Run pre_hw_config.sh before entering charge only mode.
     exec /system/bin/sh /system/etc/pre_hw_config.sh
 
-    # Display color correction is needed in charge only mode as well.
-    start display_cc
-
-    # Start the offline charging (This blocks booting further in some cases)
-    exec /system/bin/chargemon
-    write /sys/module/pm8921_charger/parameters/enable_lowbatt_detect 1
+    start ta_qmi_service
+    start sct_service
 
 on boot
+    insmod /system/lib/modules/adsprpc.ko
+    insmod /system/lib/modules/adsp-loader.ko
+
     exec /system/bin/btnvtool -O
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
     chown bluetooth bluetooth /proc/bluetooth/sleep/proto
+    chown bluetooth bluetooth /sys/module/hci_uart/parameters/ath_lpm
+    chown bluetooth bluetooth /sys/module/hci_uart/parameters/ath_btwrite
     chown system system /sys/module/sco/parameters/disable_esco
     chown bluetooth bluetooth /sys/module/hci_smd/parameters/hcismd_set
     chmod 0660 /sys/module/bluetooth_power/parameters/power
@@ -97,9 +108,14 @@ on boot
     chmod 0660 /sys/class/rfkill/rfkill0/state
     chmod 0660 /proc/bluetooth/sleep/proto
     chown bluetooth bluetooth /dev/ttyHS0
+    chmod 0660 /sys/module/hci_uart/parameters/ath_lpm
+    chmod 0660 /sys/module/hci_uart/parameters/ath_btwrite
     chmod 0660 /dev/ttyHS0
     chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
     chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
+
+    chmod 0660 /dev/ttyHS2
+    chown bluetooth bluetooth /dev/ttyHS2
 
     # Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
@@ -189,6 +205,10 @@ on boot
     write /proc/sys/net/ipv6/conf/rmnet_usb1/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet_usb2/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet_usb3/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet_usb0/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet_usb1/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet_usb2/accept_ra 2
+    write /proc/sys/net/ipv6/conf/rmnet_usb3/accept_ra 2
 
     # To prevent out of order acknowledgements from making
     # connection tracking to treat them as not belonging to
@@ -200,8 +220,12 @@ on boot
 
 # Assign TCP buffer thresholds to be ceiling value of technology maximums
 # Increased technology maximums should be reflected here.
-    write /proc/sys/net/core/rmem_max  1220608
-    write /proc/sys/net/core/wmem_max  1220608
+    write /proc/sys/net/core/rmem_max  2097152
+    write /proc/sys/net/core/wmem_max  2097152
+
+on post-fs
+    exec /system/bin/chargemon
+    write /sys/class/power_supply/battery/enable_stop_charging_at_low_battery 1
 
 # msm specific files that need to be created on /data
 on post-fs-data
@@ -219,9 +243,9 @@ on post-fs-data
     mkdir /data/misc/wifi/prima 0775 wifi wifi
     exec /system/bin/mac-update
 
-    write /sys/module/wcnss_ssr_8960/parameters/enable_riva_ssr 1
-    write /sys/devices/platform/wcnss_wlan.0/serial_number ${ro.serialno}
-    write /dev/wcnss_wlan 1
+#    write /sys/module/wcnss_ssr_8960/parameters/enable_riva_ssr 1
+#    write /sys/devices/platform/wcnss_wlan.0/serial_number ${ro.serialno}
+#    write /dev/wcnss_wlan 1
 
     mkdir /data/tombstones 0771 system system
     mkdir /tombstones/modem 0771 system system
@@ -268,7 +292,6 @@ on post-fs-data
 
     # Enable Power save functionality for modem
     setprop persist.radio.add_power_save 1
-    exec /system/bin/cal_data_manager
 
     chown system /dev/block/platform/msm_sdcc.1/by-name
 
@@ -281,10 +304,10 @@ on post-fs-data
     chmod 2770 /dev/socket/mpdecision
 
     # Enable Power modes and set the CPU Freq Sampling rates
-    write /sys/module/rpm_resources/enable_low_power/L2_cache 1
-    write /sys/module/rpm_resources/enable_low_power/pxo 1
-    write /sys/module/rpm_resources/enable_low_power/vdd_dig 1
-    write /sys/module/rpm_resources/enable_low_power/vdd_mem 1
+    write /sys/module/lpm_resources/enable_low_power/l2 1
+    write /sys/module/lpm_resources/enable_low_power/pxo 1
+    write /sys/module/lpm_resources/enable_low_power/vdd_dig 1
+    write /sys/module/lpm_resources/enable_low_power/vdd_mem 1
     write /sys/module/pm_8x60/modes/cpu0/retention/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu1/retention/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu2/retention/idle_enabled 1
@@ -293,6 +316,7 @@ on post-fs-data
     write /sys/module/pm_8x60/modes/cpu1/power_collapse/suspend_enabled 1
     write /sys/module/pm_8x60/modes/cpu2/power_collapse/suspend_enabled 1
     write /sys/module/pm_8x60/modes/cpu3/power_collapse/suspend_enabled 1
+    write /sys/module/pm_8x60/modes/cpu0/power_collapse/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu0/standalone_power_collapse/suspend_enabled 1
     write /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/suspend_enabled 1
     write /sys/module/pm_8x60/modes/cpu2/standalone_power_collapse/suspend_enabled 1
@@ -301,7 +325,6 @@ on post-fs-data
     write /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu2/standalone_power_collapse/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu3/standalone_power_collapse/idle_enabled 1
-    write /sys/module/pm_8x60/modes/cpu0/power_collapse/idle_enabled 1
     write /sys/module/msm_thermal/core_control/enabled 0
     write /sys/devices/system/cpu/cpu1/online 1
     write /sys/devices/system/cpu/cpu2/online 1
@@ -333,18 +356,12 @@ on post-fs-data
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 1
 
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 384000
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 384000
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 384000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 300000
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 300000
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 300000
     chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
     chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-    chown system /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
-    chown system /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
-    chown system /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq
-    chown system /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq
-    chown system /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq
-    chown system /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq
     write /sys/module/msm_thermal/core_control/enabled 1
     chown root system /sys/devices/system/cpu/mfreq
     chmod 220 /sys/devices/system/cpu/mfreq
@@ -354,6 +371,7 @@ on post-fs-data
     chmod 664 /sys/devices/system/cpu/cpu1/online
     chmod 664 /sys/devices/system/cpu/cpu2/online
     chmod 664 /sys/devices/system/cpu/cpu3/online
+    write /dev/cpuctl/apps/cpu.notify_on_migrate 1
     # set DCVS parameters for CPU
     write /sys/module/msm_dcvs/cores/cpu0/slack_time_max_us 40000
     write /sys/module/msm_dcvs/cores/cpu0/slack_time_min_us 40000
@@ -407,12 +425,17 @@ on post-fs-data
 
     write /sys/devices/platform/msm_sdcc.3/idle_timeout 10
 
+    # Camera
+    mkdir /data/camera 0771 root camera
+    chown camera camera /sys/devices/sony_camera_0/info
+    chown camera camera /sys/devices/sony_camera_1/info
+
 on charger
     # Enable Power modes and set the CPU Freq Sampling rates
-    write /sys/module/rpm_resources/enable_low_power/L2_cache 1
-    write /sys/module/rpm_resources/enable_low_power/pxo 1
-    write /sys/module/rpm_resources/enable_low_power/vdd_dig 1
-    write /sys/module/rpm_resources/enable_low_power/vdd_mem 1
+    write /sys/module/lpm_resources/enable_low_power/l2 1
+    write /sys/module/lpm_resources/enable_low_power/pxo 1
+    write /sys/module/lpm_resources/enable_low_power/vdd_dig 1
+    write /sys/module/lpm_resources/enable_low_power/vdd_mem 1
     write /sys/module/pm_8x60/modes/cpu0/retention/idle_enabled 1
     write /sys/module/pm_8x60/modes/cpu0/power_collapse/suspend_enabled 1
     write /sys/module/pm_8x60/modes/cpu1/power_collapse/suspend_enabled 1
@@ -431,28 +454,16 @@ on charger
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "powersave"
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "powersave"
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "powersave"
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 384000
-    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 384000
-    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 384000
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 300000
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_min_freq 300000
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_min_freq 300000
     write /sys/devices/system/cpu/cpu1/online 0
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
 
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
-
-service rmt_storage /system/bin/rmt_storage
-    class main
-    user root
-
-# Fast Dormancy
-service fast-dormancy /system/bin/fast-dormancy
-    class late_start
-    disabled
-
-on property:ro.semc.enable.fast_dormancy=false
-    stop fast-dormancy
 
 # Update WIFI MAC address
 service mac-update /system/bin/mac-update
@@ -488,15 +499,6 @@ service tad /sbin/tad_static /dev/block/mmcblk0 1,16
     socket tad stream 0660 system system
     disabled
 
-# SONY: Trim Area QMI client
-# Should have the same class as qmuxd, to be sure that it will be restarted in same way
-# as qmuxd if phone is encrypted. This is a workaround, because sometimes
-# QMI_SYS_EVENT_MODEM_OUT_OF_SERVICE_IND is not sending if qmuxd is terminated during decryption,
-# so, ta_qmi_client was not notified that connection to the TA Service on MDM is lost.
-service ta_qmi_client /system/bin/ta_qmi_client
-    class main
-    user root
-
 service updatemiscta /system/bin/updatemiscta
     class main
     user root
@@ -511,9 +513,9 @@ service qrngd /system/bin/qrngd -f
     group root
 
 service qseecomd /system/bin/qseecomd
-    class late_start
-    user system
-    group system
+   class main
+   user root
+   group root
 
 service hw_config /system/bin/sh /system/etc/hw_config.sh
     class main
@@ -581,6 +583,13 @@ service thermald /system/bin/thermald -c /system/etc/thermald.conf
     class main
     socket thermald stream 0666 root root
     user root
+    disabled
+
+service thermal-engine /system/bin/thermal-engine -c /system/etc/thermal-engine.conf
+   class main
+   user root
+   group root
+    disabled
 
 service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
     class main
@@ -599,3 +608,56 @@ service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
     group system qcom_oncrpc
     disabled
     oneshot
+
+service illumination /system/bin/illumination_service
+    socket illumination stream 0660 root system
+    class main
+    user root
+
+# Secure Config Transfer service
+service sct_service /system/bin/sct_service
+    user root
+    disabled
+
+# Trim Area QMI service
+service ta_qmi_service /system/bin/ta_qmi_service
+    user root
+    disabled
+
+service scd /system/bin/scd
+    class main
+    user system
+    group system
+
+# Should start once all filesystem is mounted
+service ssr_dump /system/bin/ssrapp
+   class main
+   user root
+
+# Start system_monitor
+service system_monitor /system/bin/system_monitor
+    socket sysmon stream 0660 root system
+    class core
+    user root
+
+service rmt_storage /system/bin/rmt_storage
+    class main
+    user root
+
+on property:service.acccalib.start=service_setting
+    exec /system/bin/acc_cal_data_manager service_setting
+
+on property:service.calib.start=service_setting
+    exec /system/bin/cal_data_manager service_setting
+
+on property:service.proxcalib.start=service_setting
+    exec /system/bin/prox_cal_data_manager service_setting
+
+on property:service.proxcalib.start=service_setting_default
+    exec /system/bin/prox_cal_data_manager service_setting_default
+
+on property:persist.service.cabc.enable=0
+    exec /system/bin/set_cabc 0
+
+on property:persist.service.cabc.enable=1
+    exec /system/bin/set_cabc 1
