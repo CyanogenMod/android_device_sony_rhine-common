@@ -642,6 +642,11 @@ service rmt_storage /system/bin/rmt_storage
     class main
     user root
 
+service irsc_util /system/bin/logwrapper /system/bin/irsc_util "/etc/sec_config"
+    class main
+    user root
+    oneshot
+
 on property:service.acccalib.start=service_setting
     exec /system/bin/acc_cal_data_manager service_setting
 
