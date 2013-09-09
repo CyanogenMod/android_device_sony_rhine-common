@@ -110,6 +110,8 @@
 #
 # Change file permission and owner for sensors
 #
+/dev/adsprpc-smd          0664   system     system
+
 # magnetometer #
 /sys/devices/virtual/input/input* interval      0600  system  system
 /sys/devices/virtual/input/input* obit          0600  system  system

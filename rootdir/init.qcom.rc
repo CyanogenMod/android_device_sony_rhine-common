@@ -73,7 +73,9 @@ on fs
     chown system system /lta-label
     chmod 0555 /lta-label
 
-    chmod 0775 /data/etc
+    insmod /system/lib/modules/adsp-loader.ko
+
+    chmod 0755 /data/etc
     start tad
     exec /sbin/wait4tad_static
     exec /system/bin/taimport
@@ -89,9 +91,6 @@ on early-boot
     start sct_service
 
 on boot
-    insmod /system/lib/modules/adsprpc.ko
-    insmod /system/lib/modules/adsp-loader.ko
-
     exec /system/bin/btnvtool -O
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
@@ -177,7 +176,7 @@ on boot
     chown root system /proc/net/ip_conntrack
 
     # WTF
-    chmod 666 /proc/cmdline
+    chmod 444 /proc/cmdline
 
     # Enable DEBUG_SUSPEND, DEBUG_EXIT_SUSPEND, and DEBUG_WAKEUP
     write /sys/module/wakelock/parameters/debug_mask 7
@@ -221,6 +220,14 @@ on boot
     write /proc/sys/net/core/rmem_max  2097152
     write /proc/sys/net/core/wmem_max  2097152
 
+# QCOM Sensors
+    insmod /system/lib/modules/adsprpc.ko
+    mkdir /data/system/sensors 0775 system system
+    mkdir /data/misc/sensors 0775 system system
+    write /data/system/sensors/settings 1
+    chmod 664 /data/system/sensors/settings
+    start sensors
+
 on post-fs
     exec /system/bin/chargemon
     write /sys/class/power_supply/battery/enable_stop_charging_at_low_battery 1
@@ -243,8 +250,6 @@ on post-fs-data
 
     write /dev/wcnss_wlan 1
     write /sys/devices/fb000000.qcom,wcnss-wlan/serial_number ${ro.serialno}
-
-    #insmod /system/lib/modules/cfg80211.ko
 
     mkdir /data/tombstones 0771 system system
     mkdir /tombstones/modem 0771 system system
@@ -652,6 +657,18 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
+
+service ppd /system/bin/mm-pp-daemon
+    class late_start
+    user system
+    socket pps stream 0660 system system graphics
+    group system graphics
+
+service sensors /system/bin/sensors.qcom
+    class main
+    user root
+    group root
+    disabled
 
 on property:service.acccalib.start=service_setting
     exec /system/bin/acc_cal_data_manager service_setting
