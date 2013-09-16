@@ -123,16 +123,25 @@ static int set_light_backlight (struct light_device_t *dev, struct light_state_t
 	int err = 0;
 	int brightness = rgb_to_brightness(state);
 
-	if(brightness > 0)
+	if (brightness > 0)
 		brightness = brightness_apply_gamma(brightness);
+
+	if (brightness < 100)
+		brightness = 100;
+	else if (brightness > 127)
+		brightness *= 2;
+	else if (brightness > 150)
+		brightness *= 3;
+	else if (brightness > 170)
+		brightness *= 4;
+	else if (brightness > 190)
+		brightness *= 5;
+	else if (brightness > 200)
+		brightness *= 16;
 
 	ALOGV("%s brightness=%d", __func__, brightness);
 	pthread_mutex_lock(&g_lock);
 	err |= write_int (LCD_BACKLIGHT_FILE, brightness);
-
-	//dirty fix for black display
-	if (brightness != 0 && brightness < 180)
-		brightness = 180;
 	err |= write_int (LCD_BACKLIGHT2_FILE, brightness);
 
 	pthread_mutex_unlock(&g_lock);
@@ -160,11 +169,11 @@ static void set_shared_light_locked (struct light_device_t *dev, struct light_st
 	if (state->flashOnMS == 1)
 		state->flashMode = LIGHT_FLASH_NONE;
 	else {
-	//PATTERN=DelayOn,DelayOff,FadeIn,FadeOut
-	sprintf (dOn,"%d",delayOn);
-	sprintf (dOff,"%d",delayOff);
-	asprintf (&pattern,"%s,%s,100,100",dOn,dOff);
-	ALOGV("pattern=%s",pattern);
+		//PATTERN=DelayOn,DelayOff,FadeIn,FadeOut
+		sprintf (dOn,"%d",delayOn);
+		sprintf (dOff,"%d",delayOff);
+		asprintf (&pattern,"%s,%s,100,100",dOn,dOff);
+		ALOGV("pattern=%s",pattern);
 	}
 
 	switch (state->flashMode) {
