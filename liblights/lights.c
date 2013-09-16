@@ -123,21 +123,12 @@ static int set_light_backlight (struct light_device_t *dev, struct light_state_t
 	int err = 0;
 	int brightness = rgb_to_brightness(state);
 
-	if (brightness > 0)
+	if (brightness > 0) {
 		brightness = brightness_apply_gamma(brightness);
-
-	if (brightness < 100)
-		brightness = 100;
-	else if (brightness > 127)
-		brightness *= 2;
-	else if (brightness > 150)
-		brightness *= 3;
-	else if (brightness > 170)
-		brightness *= 4;
-	else if (brightness > 190)
-		brightness *= 5;
-	else if (brightness > 200)
-		brightness *= 16;
+		brightness = 4095 * brightness / 255;
+	}
+	if (brightness < 188)
+		brightness = 188;
 
 	ALOGV("%s brightness=%d", __func__, brightness);
 	pthread_mutex_lock(&g_lock);
