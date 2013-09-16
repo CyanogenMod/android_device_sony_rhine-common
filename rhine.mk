@@ -188,11 +188,24 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.handset.mic=analog \
     persist.audio.hp=true \
     ro.qc.sdk.audio.fluencetype=none \
+    persist.speaker.prot.enable=false \
     lpa.decode=false \
     lpa.use-stagefright=true \
     tunnel.decode=true \
     tunnel.audiovideo.decode=true \
     tunnel.multiple=true
+
+# aDSP
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qualcomm.sensors.qmd=false \
+    debug.qualcomm.sns.hal=w \
+    ro.qc.sdk.sensors.gestures=false \
+    ro.qc.sensors.max_accel_rate=false \
+    ro.qc.sensors.max_gyro_rate=false \
+    ro.qc.sensors.max_mag_rate=false \
+    ro.qualcomm.sensors.pedometer=false \
+    ro.qualcomm.sensors.pam=false \
+    ro.qualcomm.sensors.scrn_ortn=false
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
