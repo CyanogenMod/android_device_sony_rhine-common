@@ -59,12 +59,14 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini
 
-
 # QCOM Display
 PRODUCT_PACKAGES += \
     hwcomposer.msm8974 \
     gralloc.msm8974 \
     copybit.msm8974
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.gralloc.cp.level3=1
 
 # NFC Support
 PRODUCT_PACKAGES += \
