@@ -20,5 +20,8 @@
 #define PROPERTY_PERMS_APPEND \
     { "camera.",          AID_MEDIA,    0 },
 
+#define CONTROL_PERMS_APPEND \
+    { "media.cacao",      AID_MEDIA, AID_MEDIA },
+
 #endif /* DEVICE_PERMS_H */
 
