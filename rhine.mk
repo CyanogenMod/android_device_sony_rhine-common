@@ -116,10 +116,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     lights.msm8974
 
-# Sensors
-PRODUCT_PACKAGES += \
-    sensors.default
-
 # WIFI MAC update
 PRODUCT_PACKAGES += \
     mac-update
