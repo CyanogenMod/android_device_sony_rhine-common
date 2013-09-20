@@ -20,6 +20,16 @@ TARGET_USES_QCOM_BSP := true
 COMMON_GLOBAL_CFLAGS += -DQCOM_BSP
 BOARD_EGL_CFG := device/sony/rhine-common/rootdir/system/lib/egl/egl.cfg
 
+# Shader cache config options
+# Maximum size of the  GLES Shaders that can be cached for reuse.
+# Increase the size if shaders of size greater than 12KB are used.
+MAX_EGL_CACHE_KEY_SIZE := 12*1024
+
+# Maximum GLES shader cache size for each app to store the compiled shader
+# binaries. Decrease the size if RAM or Flash Storage size is a limitation
+# of the device.
+MAX_EGL_CACHE_SIZE := 2048*1024
+
 # inherit from qcom-common
 -include device/sony/qcom-common/BoardConfigCommon.mk
 
@@ -37,6 +47,7 @@ BOARD_LIB_DUMPSTATE := libdumpstate.sony
 
 # Architecture
 TARGET_ARCH_VARIANT_CPU := cortex-a9
+TARGET_CPU_VARIANT := krait
 
 # Flags
 TARGET_GLOBAL_CFLAGS += -mfpu=neon-vfpv4 -mfloat-abi=softfp
@@ -75,12 +86,6 @@ BOARD_USE_SONY_MACUPDATE := true
 
 TARGET_PROVIDES_LIBLIGHT := true
 
-# Camera
-COMMON_GLOBAL_CFLAGS += -DQCOM_BSP_CAMERA_ABI_HACK
-
-# ION
-COMMON_GLOBAL_CFLAGS += -DNEW_ION_API
-
 # GPS
 TARGET_PROVIDES_GPS_LOC_API := true
 
@@ -97,6 +102,9 @@ TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 BOARD_CUSTOM_BOOTIMG_MK := device/sony/rhine-common/custombootimg.mk
 BOARD_CUSTOM_GRAPHICS := ../../../device/sony/rhine-common/recovery/graphics.c
 BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_23x41.h\"
+
+TARGET_RECOVERY_FSTAB := device/sony/rhine-common/rootdir/fstab.qcom
+RECOVERY_FSTAB_VERSION := 2
 
 BOARD_FLASH_BLOCK_SIZE := 131072
 BOARD_HAS_NO_SELECT_BUTTON := true
@@ -118,6 +126,8 @@ COMMON_GLOBAL_CFLAGS += -DDOLBY_DAP -DQCOM_DS1_DOLBY_DAP
 
 # Media
 TARGET_QCOM_MEDIA_VARIANT := caf
+
+BOARD_CHARGER_ENABLE_SUSPEND := true
 
 # Sensors
 #SOMC_CFG_SENSORS := true

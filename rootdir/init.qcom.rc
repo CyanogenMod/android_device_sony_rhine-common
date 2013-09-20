@@ -119,7 +119,7 @@ on boot
     chmod 2770 /dev/socket/qmux_radio
     mkdir /dev/socket/qmux_audio 0770 media audio
     chmod 2770 /dev/socket/qmux_audio
-    mkdir /dev/socket/qmux_bluetooth 0770 bluetooth bluetooth
+    mkdir /dev/socket/qmux_bluetooth 0770 bluetooth net_bt_stack
     chmod 2770 /dev/socket/qmux_bluetooth
     mkdir /dev/socket/qmux_gps 0770 gps gps
     chmod 2770 /dev/socket/qmux_gps
@@ -478,7 +478,7 @@ service mac-update /system/bin/mac-update
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     class late_start
     user bluetooth
-    group qcom_oncrpc bluetooth net_bt_admin system
+    group qcom_oncrpc bluetooth net_bt_admin system net_bt_stack
     disabled
     oneshot
 
@@ -492,7 +492,7 @@ on property:bluetooth.hciattach=false
 service qmuxd /system/bin/qmuxd
     class main
     user radio
-    group radio audio bluetooth gps qcom_diag
+    group radio audio bluetooth gps qcom_diag net_bt_stack
 
 # SONY: TrimArea Daemon
 # Last 2 args: start block(blk size 128k), number of blocks(partitionsize(kb)/128(kb))
@@ -526,8 +526,9 @@ service hw_config /system/bin/sh /system/etc/hw_config.sh
     user root
     oneshot
 
-service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
+service wpa_supplicant /system/bin/wpa_supplicant \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
+    -I/system/etc/wifi/wpa_supplicant_overlay.conf \
     -e/data/misc/wifi/entropy.bin
     #   we will start as root and wpa_supplicant will switch to user wifi
     #   after setting up the capabilities required for WEXT
@@ -539,8 +540,10 @@ service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
     oneshot
 
 service p2p_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
-    -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf -N \
+    -ip2p0 -Dnl80211 -c/data/misc/wifi/p2p_supplicant.conf \
+    -I/system/etc/wifi/p2p_supplicant_overlay.conf -N \
     -iwlan0 -Dnl80211 -c/data/misc/wifi/wpa_supplicant.conf \
+    -I/system/etc/wifi/wpa_supplicant_overlay.conf \
     -e/data/misc/wifi/entropy.bin -puse_p2p_group_interface=1
 #   we will start as root and wpa_supplicant will switch to user wifi
 #   after setting up the capabilities required for WEXT
@@ -571,7 +574,11 @@ service iprenew_p2p /system/bin/dhcpcd -n
     disabled
     oneshot
 
-service dhcpcd_bnep0 /system/bin/dhcpcd -BKLG
+service dhcpcd_bt-pan /system/bin/dhcpcd -BKLG
+    disabled
+    oneshot
+
+service iprenew_bt-pan /system/bin/dhcpcd -n
     disabled
     oneshot
 
@@ -669,6 +676,11 @@ service sensors /system/bin/sensors.qcom
     user root
     group root
     disabled
+
+service audiod /system/bin/audiod
+    class late_start
+    user system
+    group system
 
 on property:service.acccalib.start=service_setting
     exec /system/bin/acc_cal_data_manager service_setting
