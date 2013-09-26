@@ -602,7 +602,7 @@ service thermal-engine /system/bin/thermal-engine -c /system/etc/thermal-engine.
    group root
     disabled
 
-service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
+service mpdecision /system/bin/mpdecision --avg_comp
     class main
 
 # bugreport is triggered by holding down volume down, volume up and power
