@@ -49,7 +49,7 @@ enum {
 	LED_BLANK
 };
 
-const int LCD_BRIGHTNESS_MIN = 10;
+const int LCD_BRIGHTNESS_MIN = 188;
 
 static int write_int (const char *path, int value) {
 	int fd;
@@ -112,8 +112,6 @@ static int brightness_apply_gamma (int brightness) {
 	ALOGV("%s: gamma corrected floatbrt = %f", __func__, floatbrt);
 	floatbrt *= 255.0;
 	brightness = (int) floatbrt;
-	if (brightness < LCD_BRIGHTNESS_MIN)
-		brightness = LCD_BRIGHTNESS_MIN;
 	ALOGV("%s: gamma corrected brightness = %d", __func__, brightness);
 	return brightness;
 }
@@ -126,9 +124,9 @@ static int set_light_backlight (struct light_device_t *dev, struct light_state_t
 	if (brightness > 0) {
 		brightness = brightness_apply_gamma(brightness);
 		brightness = 4095 * brightness / 255;
+		if (brightness < LCD_BRIGHTNESS_MIN)
+			brightness = LCD_BRIGHTNESS_MIN;
 	}
-	if (brightness < 188)
-		brightness = 188;
 
 	ALOGV("%s brightness=%d", __func__, brightness);
 	pthread_mutex_lock(&g_lock);
