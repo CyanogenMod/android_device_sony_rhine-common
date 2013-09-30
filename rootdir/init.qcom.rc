@@ -222,6 +222,7 @@ on boot
 
 # QCOM Sensors
     insmod /system/lib/modules/adsprpc.ko
+    mkdir /data/system 0775 system system
     mkdir /data/system/sensors 0775 system system
     mkdir /data/misc/sensors 0775 system system
     write /data/system/sensors/settings 1
@@ -279,9 +280,6 @@ on post-fs-data
     chown system system /sys/devices/platform/msm_sdcc.4/polling
 
     chown system system /sys/devices/platform/kgsl-3d0.0/kgsl/kgsl-3d0/pwrscale/policy
-
-    # Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
-    mkdir /data/system 0775 system system
 
     # Create directories for gpsone_daemon services
     mkdir /data/misc/gpsone_d 0770 system gps
