@@ -97,7 +97,6 @@ PRODUCT_PACKAGES += \
 
 # Audio
 PRODUCT_PACKAGES += \
-    alsa.msm8974 \
     audio_policy.msm8974 \
     audio.primary.msm8974 \
     audio.a2dp.default \
@@ -191,9 +190,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.speaker.prot.enable=false \
     lpa.decode=false \
     lpa.use-stagefright=true \
-    tunnel.decode=true \
-    tunnel.audiovideo.decode=true \
-    tunnel.multiple=true
+    tunnel.decode=false \
+    tunnel.audiovideo.decode=false \
+    tunnel.multiple=false
 
 # aDSP
 PRODUCT_PROPERTY_OVERRIDES += \
