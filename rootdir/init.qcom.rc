@@ -665,6 +665,7 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
 
 service ppd /system/bin/mm-pp-daemon
     class late_start
+    disabled
     user system
     socket pps stream 0660 system system graphics
     group system graphics
@@ -697,3 +698,9 @@ on property:persist.service.cabc.enable=0
 
 on property:persist.service.cabc.enable=1
     exec /system/bin/set_cabc 1
+
+on property:init.svc.surfaceflinger=running
+    start ppd
+
+on property:init.svc.surfaceflinger=stopped
+    stop ppd
