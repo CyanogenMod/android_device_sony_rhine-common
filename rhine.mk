@@ -212,6 +212,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.demo.hdmirotationlock=false
 
+# Time
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.timed.enable=true
+
 # VIDC debug_levels
 # 1:ERROR 2:HIGH 4:LOW 0:NOLOGS 7:AllLOGS
 PRODUCT_PROPERTY_OVERRIDES += \
