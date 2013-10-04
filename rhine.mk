@@ -180,7 +180,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # GPS
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.gps.qmienabled=true
+    persist.gps.qc_nlp_in_use=0
 
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
