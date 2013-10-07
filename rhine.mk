@@ -113,10 +113,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/system/etc/media_profiles.xml:system/etc/media_profiles.xml
 
-# Light
-PRODUCT_PACKAGES += \
-    lights.msm8974
-
 # WIFI MAC update
 PRODUCT_PACKAGES += \
     mac-update
