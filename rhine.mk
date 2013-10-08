@@ -206,6 +206,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.sensors.pam=false \
     ro.qualcomm.sensors.scrn_ortn=false
 
+# WFD
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.debug.wfd.enable=1 \
+    persist.sys.wfd.virtual=0
+
+# HDMI
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.demo.hdmirotationlock=false
+
 # VIDC debug_levels
 # 1:ERROR 2:HIGH 4:LOW 0:NOLOGS 7:AllLOGS
 PRODUCT_PROPERTY_OVERRIDES += \
