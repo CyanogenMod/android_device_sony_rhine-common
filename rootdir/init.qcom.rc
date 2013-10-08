@@ -175,9 +175,6 @@ on boot
 
     chown root system /proc/net/ip_conntrack
 
-    # WTF
-    chmod 444 /proc/cmdline
-
     # Enable DEBUG_SUSPEND, DEBUG_EXIT_SUSPEND, and DEBUG_WAKEUP
     write /sys/module/wakelock/parameters/debug_mask 7
 
@@ -214,11 +211,6 @@ on boot
     # connections on high-throughput links get dropped when
     # an ack packet comes out of order
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
-
-# Assign TCP buffer thresholds to be ceiling value of technology maximums
-# Increased technology maximums should be reflected here.
-    write /proc/sys/net/core/rmem_max  2097152
-    write /proc/sys/net/core/wmem_max  2097152
 
 # QCOM Sensors
     insmod /system/lib/modules/adsprpc.ko
@@ -515,9 +507,9 @@ service qrngd /system/bin/qrngd -f
     group root
 
 service qseecomd /system/bin/qseecomd
-   class main
-   user root
-   group root
+    class core
+    user root
+    group root
 
 service hw_config /system/bin/sh /system/etc/hw_config.sh
     class main
@@ -595,9 +587,9 @@ service thermald /system/bin/thermald -c /system/etc/thermald.conf
     disabled
 
 service thermal-engine /system/bin/thermal-engine -c /system/etc/thermal-engine.conf
-   class main
-   user root
-   group root
+    class main
+    user root
+    group root
     disabled
 
 service mpdecision /system/bin/mpdecision --avg_comp
@@ -640,8 +632,8 @@ service scd /system/bin/scd
 
 # Should start once all filesystem is mounted
 service ssr_dump /system/bin/ssrapp
-   class main
-   user root
+    class main
+    user root
 
 # Start system_monitor
 service system_monitor /system/bin/system_monitor
