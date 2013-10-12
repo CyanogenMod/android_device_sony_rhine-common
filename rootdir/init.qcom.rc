@@ -90,6 +90,8 @@ on early-boot
     start ta_qmi_service
     start sct_service
 
+    exec /system/bin/sh /system/etc/init.qcom.wifi.sh
+
 on boot
     exec /system/bin/btnvtool -O
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
@@ -240,9 +242,6 @@ on post-fs-data
     # Update WIFI MAC address
     mkdir /data/misc/wifi/prima 0775 wifi wifi
     exec /system/bin/mac-update
-
-    write /dev/wcnss_wlan 1
-    write /sys/devices/fb000000.qcom,wcnss-wlan/serial_number ${ro.serialno}
 
     mkdir /data/tombstones 0771 system system
     mkdir /tombstones/modem 0771 system system
@@ -672,6 +671,12 @@ service audiod /system/bin/audiod
     class late_start
     user system
     group system
+
+service wcnss-service /system/bin/wcnss_service
+    class late_start
+    user system
+    group system wifi
+    oneshot
 
 on property:service.acccalib.start=service_setting
     exec /system/bin/acc_cal_data_manager service_setting

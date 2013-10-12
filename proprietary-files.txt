@@ -1,3 +1,4 @@
+bin/wcnss_service
 etc/firmware/dxhdcp2.b00
 etc/firmware/dxhdcp2.b01
 etc/firmware/dxhdcp2.b02
