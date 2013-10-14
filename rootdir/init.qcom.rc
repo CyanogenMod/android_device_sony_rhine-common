@@ -224,6 +224,8 @@ on boot
     chmod 664 /data/system/sensors/settings
     start sensors
 
+    chown system /sys/devices/virtual/timed_output/vibrator/vtg_level
+
 on post-fs
     exec /system/bin/chargemon
     write /sys/class/power_supply/battery/enable_stop_charging_at_low_battery 1
