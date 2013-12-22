@@ -43,15 +43,13 @@ on init
     symlink /storage/usbdisk /usbdisk
     symlink /storage/usbdisk /mnt/usbdisk
 
-    symlink /dev/socket /tmp
+    mkdir /tmp
+    mount tmpfs tmpfs /tmp nosuid mode=0755,uid=0,gid=0
     chmod 0664 /proc/rdtag
     chown root system /proc/rdtag
 
     mkdir /dev/bus 0755 root root
     mkdir /dev/bus/usb 0755 root root
-
-    # create directory for scd
-    mkdir /dev/socket/scd 0755 system system
 
     # Enable ramdumps from subsystems to dump
     # Should be initialized during init
@@ -62,6 +60,11 @@ on init
 
     # Enable panic on out of memory
     write /proc/sys/vm/panic_on_oom 2
+
+    # Set the property to indicate type of virtual display to 0
+    # 0 indicates that virtual display is not a Wifi display and that the
+    # session is not exercised through RemoteDisplay in the android framework
+    setprop persist.sys.wfd.virtual 0
 
 on fs
     mount_all ./fstab.qcom
@@ -79,21 +82,25 @@ on fs
     start tad
     exec /sbin/wait4tad_static
     exec /system/bin/taimport
+
+    write /sys/kernel/boot_adsp/boot 1
+
     restorecon -R /data/etc
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
 
-    # Run pre_hw_config.sh before entering charge only mode.
-    exec /system/bin/sh /system/etc/pre_hw_config.sh
-
     start ta_qmi_service
     start sct_service
+
+    # Run pre_hw_config.sh before entering charge only mode.
+    exec /system/bin/sh /system/etc/pre_hw_config.sh
 
     exec /system/bin/sh /system/etc/init.qcom.wifi.sh
 
 on boot
+    write /sys/module/qpnp_power_on/parameters/forcecrash_on 1
     exec /system/bin/btnvtool -O
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
@@ -126,9 +133,6 @@ on boot
     chmod 2770 /dev/socket/qmux_bluetooth
     mkdir /dev/socket/qmux_gps 0770 gps gps
     chmod 2770 /dev/socket/qmux_gps
-
-    # Allow QMUX daemon to assign port open wait time
-    chown radio radio /sys/devices/virtual/hsicctl/hsicctl0/modem_wait
 
     setprop ro.telephony.call_ring.multiple false
 
@@ -215,6 +219,14 @@ on boot
     # an ack packet comes out of order
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
 
+    # NFC local data and nfcee xml storage
+    mkdir /data/nfc 0770 nfc nfc
+    mkdir /data/nfc/param 0770 nfc nfc
+
+    # Set the console loglevel to < KERN_INFO
+    # Set the default message loglevel to KERN_INFO
+    write /proc/sys/kernel/printk "6 6 1 7"
+
 # QCOM Sensors
     insmod /system/lib/modules/adsprpc.ko
     mkdir /data/system 0775 system system
@@ -240,18 +252,21 @@ on post-fs-data
     mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     # to observe dnsmasq.leases file for dhcp information of soft ap.
-    chown dhcp system /data/misc/dhcp
+    chown dhcp dhcp /data/misc/dhcp
 
     # Update WIFI MAC address
     mkdir /data/misc/wifi/prima 0775 wifi wifi
     exec /system/bin/mac-update
 
-    mkdir /data/tombstones 0771 system system
-    mkdir /tombstones/modem 0771 system system
-    mkdir /tombstones/lpass 0771 system system
-    mkdir /tombstones/wcnss 0771 system system
-    mkdir /tombstones/dsps 0771 system system
-    mkdir /tombstones/mdm 0771 system system
+    mkdir /data/credmgr 0700 system system
+    mkdir /data/tombstones 0755 system system
+    mkdir /tombstones/modem 0755 system system
+    mkdir /tombstones/lpass 0755 system system
+    mkdir /tombstones/wcnss 055 system system
+    mkdir /tombstones/dsps 0755 system system
+    mkdir /tombstones/mdm 0755 system system
+    mkdir /tombstones/vendor 0755 system system
+    mkdir /data/persist 0770 system system
 
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
@@ -424,10 +439,12 @@ on post-fs-data
 
     write /sys/devices/platform/msm_sdcc.3/idle_timeout 10
 
-    # Camera
-    mkdir /data/camera 0771 root camera
-    chown camera camera /sys/devices/sony_camera_0/info
-    chown camera camera /sys/devices/sony_camera_1/info
+    # SONY: Camera
+    mkdir /data/camera 0770 media media
+    chown media media /sys/devices/sony_camera_0/info
+    chmod 0770 /sys/devices/sony_camera_0/info
+    chown media media /sys/devices/sony_camera_1/info
+    chmod 0770 /sys/devices/sony_camera_1/info
 
 on charger
     # Enable Power modes and set the CPU Freq Sampling rates
@@ -592,14 +609,19 @@ service thermald /system/bin/thermald -c /system/etc/thermald.conf
     user root
     disabled
 
-service thermal-engine /system/bin/thermal-engine -c /system/etc/thermal-engine.conf
-    class main
-    user root
-    group root
-    disabled
+#service thermal-engine /system/bin/thermal-engine -c /system/etc/thermal-engine.conf
+#    class main
+#    user root
+#    group root
+#    disabled
 
 service mpdecision /system/bin/mpdecision --avg_comp
     class main
+
+service adsprpcd /system/bin/adsprpcd
+   class main
+   user media
+   group media system
 
 # bugreport is triggered by holding down volume down, volume up and power
 service bugreport /system/bin/dumpstate -d -p -B \
@@ -621,6 +643,11 @@ service illumination /system/bin/illumination_service
     class main
     user root
 
+service scd /system/bin/scd
+    class main
+    user system
+    group system
+
 # Secure Config Transfer service
 service sct_service /system/bin/sct_service
     user root
@@ -630,16 +657,6 @@ service sct_service /system/bin/sct_service
 service ta_qmi_service /system/bin/ta_qmi_service
     user root
     disabled
-
-service scd /system/bin/scd
-    class main
-    user system
-    group system
-
-# Should start once all filesystem is mounted
-service ssr_dump /system/bin/ssrapp
-    class main
-    user root
 
 # Start system_monitor
 service system_monitor /system/bin/system_monitor
@@ -659,7 +676,7 @@ service irsc_util /system/bin/logwrapper /system/bin/irsc_util "/etc/sec_config"
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
     user camera
-    group camera system inet input graphics
+    group media system inet input graphics
 
 service ppd /system/bin/mm-pp-daemon
     class late_start
@@ -683,12 +700,18 @@ service wcnss-service /system/bin/wcnss_service
     class late_start
     user system
     group system wifi
+    disabled
     oneshot
 
 service time_daemon /system/bin/time_daemon
     class late_start
     user root
     group root
+
+service ptt_socket_app /system/bin/ptt_socket_app
+    class main
+    user system
+    group system
 
 on property:service.acccalib.start=service_setting
     exec /system/bin/acc_cal_data_manager service_setting
@@ -701,12 +724,6 @@ on property:service.proxcalib.start=service_setting
 
 on property:service.proxcalib.start=service_setting_default
     exec /system/bin/prox_cal_data_manager service_setting_default
-
-on property:persist.service.cabc.enable=0
-    exec /system/bin/set_cabc 0
-
-on property:persist.service.cabc.enable=1
-    exec /system/bin/set_cabc 1
 
 on property:init.svc.surfaceflinger=running
     start ppd
