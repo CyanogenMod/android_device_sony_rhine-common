@@ -16,9 +16,14 @@
 -include device/sony/common/BoardConfigCommon.mk
 
 # Graphics
-#TARGET_USES_QCOM_BSP := true
-#COMMON_GLOBAL_CFLAGS += -DQCOM_BSP
+TARGET_USES_QCOM_BSP := true
+COMMON_GLOBAL_CFLAGS += -DQCOM_BSP -DQCOM_HARDWARE
+BOARD_USES_QCOM_HARDWARE := true
 BOARD_EGL_CFG := device/sony/rhine-common/rootdir/system/lib/egl/egl.cfg
+
+# TARGET_QCOM_AUDIO_VARIANT := caf
+TARGET_QCOM_DISPLAY_VARIANT := caf
+TARGET_QCOM_MEDIA_VARIANT := caf
 
 # Shader cache config options
 # Maximum size of the  GLES Shaders that can be cached for reuse.
@@ -84,6 +89,8 @@ WIFI_DRIVER_FW_PATH_AP           := "ap"
 
 BOARD_USE_SONY_MACUPDATE := true
 
+
+
 # GPS
 TARGET_PROVIDES_GPS_LOC_API := true
 
@@ -121,9 +128,6 @@ QCOM_AUDIO_FEATURE_DISABLED_WFD := true
 QCOM_AUDIO_FEATURE_DISABLED_PROXY_DEVICE := true
 QCOM_AUDIO_FEATURE_DISABLED_MULTICHANNELS := true
 #QCOM_AUDIO_FEATURE_DISABLED_TUNNEL_LPA := true
-
-# Display
-TARGET_QCOM_DISPLAY_VARIANT := caf
 
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
