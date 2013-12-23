@@ -67,6 +67,7 @@
 /dev/hsicctl1             0640   radio      radio
 /dev/hsicctl2             0640   radio      radio
 /dev/hsicctl3             0640   radio      radio
+/dev/diag                 0660   radio      radio
 /dev/v4l-subdev*          0660   system     camera
 /dev/video*               0660   system     camera
 /dev/ttyHSL1              0660   system     system
