@@ -675,7 +675,7 @@ service system_monitor /system/bin/system_monitor
     user root
 
 service rmt_storage /system/bin/rmt_storage
-    class main
+    class core
     user root
 
 service irsc_util /system/bin/logwrapper /system/bin/irsc_util "/etc/sec_config"
