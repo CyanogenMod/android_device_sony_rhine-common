@@ -161,10 +161,6 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/sbin/wait4tad_static:root/sbin/wait4tad_static \
     $(COMMON_PATH)/rootdir/sbin/tad_static:root/sbin/tad_static
 
-# Thermal monitor configuration
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/system/etc/thermald.conf:system/etc/thermald.conf
-
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
