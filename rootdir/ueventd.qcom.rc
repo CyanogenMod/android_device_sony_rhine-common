@@ -141,10 +141,6 @@
 /dev/hidraw1                                     0666  system  system
 /dev/hidraw2                                     0666  system  system
 
-# NFC-FeliCa
-/dev/felica_vdev          0600  felica       felica
-/dev/felica_vsub          0660  felica       nfc
-
 # MHL
 /sys/devices/f9967000.i2c/i2c-4/4-0072/mhl/sii8334    mouse_mode   0660  system  system
 /sys/devices/f9967000.i2c/i2c-4/4-0072/mhl/sii8334    screen_status 0660  system  system

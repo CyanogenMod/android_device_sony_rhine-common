@@ -100,6 +100,8 @@ PRODUCT_PACKAGES += \
 
 # Audio
 PRODUCT_PACKAGES += \
+    audio_policy.msm8974 \
+    audio.primary.msm8974 \
     audio.a2dp.default \
     audio.usb.default \
     audio.r_submix.default \
@@ -165,7 +167,8 @@ PRODUCT_COPY_FILES += \
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp
+    persist.sys.usb.config=mtp \
+    ro.sys.umsdirtyratio=20
 
 # GPS
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -185,13 +188,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # aDSP
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.qualcomm.sensors.qmd=false \
+    ro.qualcomm.sensors.qmd=true \
     debug.qualcomm.sns.hal=w \
     ro.qc.sdk.sensors.gestures=false \
     ro.qc.sensors.max_accel_rate=false \
     ro.qc.sensors.max_gyro_rate=false \
     ro.qc.sensors.max_mag_rate=false \
-    ro.qualcomm.sensors.pedometer=false \
+    ro.qualcomm.sensors.pedometer=true \
     ro.qualcomm.sensors.pam=false \
     ro.qualcomm.sensors.scrn_ortn=false
 
