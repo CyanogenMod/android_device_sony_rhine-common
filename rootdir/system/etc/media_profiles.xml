@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright (C) 2010 The Android Open Source Project
+     Copyright (C) 2012-2013 Sony Mobile Communications AB.
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -12,6 +13,9 @@
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
      See the License for the specific language governing permissions and
      limitations under the License.
+
+     NOTE: This file has been modified by Sony Ericsson Mobile Communications AB /
+     Sony Mobile Communications AB. Modifications are licensed under the License.
 -->
 <!DOCTYPE MediaSettings [
 <!ELEMENT MediaSettings (CamcorderProfiles,
@@ -153,6 +157,7 @@
                    height="1080"
                    frameRate="30" />
 
+            <!-- audio setting is ignored -->
             <Audio codec="aac"
                    bitRate="156000"
                    sampleRate="48000"
@@ -166,6 +171,7 @@
                    height="720"
                    frameRate="30" />
 
+            <!-- audio setting is ignored -->
             <Audio codec="aac"
                    bitRate="156000"
                    sampleRate="48000"
@@ -179,7 +185,7 @@
                    height="480"
                    frameRate="30" />
             <!-- audio setting is ignored -->
-           <Audio codec="aac"
+            <Audio codec="aac"
                    bitRate="156000"
                    sampleRate="48000"
                    channels="2" />
@@ -213,7 +219,7 @@
         Profiles for the front camera
         -->
 
-      <EncoderProfile quality="1080p" fileFormat="mp4" duration="60">
+        <EncoderProfile quality="1080p" fileFormat="mp4" duration="60">
             <Video codec="h264"
                    bitRate="17500000"
                    width="1920"
@@ -336,13 +342,13 @@
          or query the capabilities of the codec at all if it is disabled
     -->
     <VideoEncoderCap name="h263" enabled="true"
-        minBitRate="96000" maxBitRate="420000"
+        minBitRate="64000" maxBitRate="2000000"
         minFrameWidth="176" maxFrameWidth="800"
         minFrameHeight="144" maxFrameHeight="480"
         minFrameRate="7" maxFrameRate="30" />
 
     <VideoEncoderCap name="h264" enabled="true"
-        minBitRate="96000" maxBitRate="20000000"
+        minBitRate="64000" maxBitRate="20000000"
         minFrameWidth="176" maxFrameWidth="1920"
         minFrameHeight="144" maxFrameHeight="1088"
         minFrameRate="1" maxFrameRate="30" />
@@ -358,8 +364,8 @@
         minSampleRate="8000" maxSampleRate="8000"
         minChannels="1" maxChannels="1" />
 
-  <AudioEncoderCap name="amrwb" enabled="true"
-        minBitRate="6600" maxBitRate="23850"
+    <AudioEncoderCap name="amrwb" enabled="true"
+        minBitRate="6600" maxBitRate="23050"
         minSampleRate="16000" maxSampleRate="16000"
         minChannels="1" maxChannels="1" />
 
@@ -376,8 +382,8 @@
         for TEST applications. For other applications, we do
         not perform any checks at all.
     -->
-    <VideoDecoderCap name="wmv" enabled="false"/>
-    <AudioDecoderCap name="wma" enabled="false"/>
+    <VideoDecoderCap name="wmv" enabled="true"/>
+    <AudioDecoderCap name="wma" enabled="true"/>
 
     <VideoEditorCap maxInputFrameWidth="1920"
         maxInputFrameHeight="1088" maxOutputFrameWidth="1920"
