@@ -726,6 +726,7 @@ service ptt_socket_app /system/bin/ptt_socket_app
     class main
     user system
     group system
+    oneshot
 
 on property:service.acccalib.start=service_setting
     exec /system/bin/acc_cal_data_manager service_setting
