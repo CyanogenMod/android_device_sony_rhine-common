@@ -101,7 +101,6 @@ PRODUCT_PACKAGES += \
 
 # Audio
 PRODUCT_PACKAGES += \
-    audio_policy.default \
     audio.primary.msm8974 \
     audio.a2dp.default \
     audio.usb.default \
@@ -131,7 +130,6 @@ PRODUCT_COPY_FILES += \
 
 # Misc
 PRODUCT_PACKAGES += \
-    librs_jni \
     com.android.future.usb.accessory
 
 # Live Wallpapers
@@ -139,6 +137,7 @@ PRODUCT_PACKAGES += \
     LiveWallpapers \
     LiveWallpapersPicker \
     VisualizationWallpapers \
+    librs_jni
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
@@ -166,8 +165,7 @@ PRODUCT_COPY_FILES += \
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp \
-    ro.sys.umsdirtyratio=20
+    persist.sys.usb.config=mtp
 
 # GPS
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -175,15 +173,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.audio.handset.mic=analog \
-    persist.audio.hp=true \
-    ro.qc.sdk.audio.fluencetype=none \
-    persist.speaker.prot.enable=false \
-    lpa.decode=false \
-    lpa.use-stagefright=true \
-    tunnel.decode=false \
-    tunnel.audiovideo.decode=false \
-    tunnel.multiple=false
+    af.resampler.quality=4
+
+# Enable AAC 5.1 output
+PRODUCT_PROPERTY_OVERRIDES += \
+    media.aac_51_output_enabled=true
 
 # aDSP
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -197,6 +191,22 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.sensors.pam=false \
     ro.qualcomm.sensors.scrn_ortn=false
 
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.hwc.mdpcomp.enable=true
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hwui.texture_cache_size=72 \
+    ro.hwui.layer_cache_size=48 \
+    ro.hwui.r_buffer_cache_size=8 \
+    ro.hwui.path_cache_size=32 \
+    ro.hwui.gradient_cache_size=1 \
+    ro.hwui.drop_shadow_cache_size=6 \
+    ro.hwui.texture_cache_flushrate=0.4 \
+    ro.hwui.text_small_cache_width=1024 \
+    ro.hwui.text_small_cache_height=1024 \
+    ro.hwui.text_large_cache_width=2048 \
+    ro.hwui.text_large_cache_height=1024
+
 # WFD
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.debug.wfd.enable=1 \
@@ -209,11 +219,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Time
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.timed.enable=true
-
-# VIDC debug_levels
-# 1:ERROR 2:HIGH 4:LOW 0:NOLOGS 7:AllLOGS
-PRODUCT_PROPERTY_OVERRIDES += \
-    vidc.debug.level=1
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \

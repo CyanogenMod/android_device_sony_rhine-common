@@ -311,6 +311,7 @@ vendor/lib/libdsnetutils.so
 vendor/lib/libdsutils.so
 vendor/lib/libgeofence.so
 vendor/lib/libidl.so
+vendor/lib/libizat_core.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegehw.so
 vendor/lib/libmm-abl-oem.so
