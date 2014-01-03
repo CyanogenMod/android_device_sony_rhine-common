@@ -309,6 +309,7 @@ vendor/lib/libdrmtime.so
 vendor/lib/libdsi_netctrl.so
 vendor/lib/libdsnetutils.so
 vendor/lib/libdsutils.so
+vendor/lib/libfastcvopt.so
 vendor/lib/libgeofence.so
 vendor/lib/libidl.so
 vendor/lib/libizat_core.so
