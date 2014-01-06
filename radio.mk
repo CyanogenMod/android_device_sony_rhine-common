@@ -10,7 +10,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # System props for the data modules
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.data.netmgrd.qos.enable=true
+    persist.data.netmgrd.qos.enable=false
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
