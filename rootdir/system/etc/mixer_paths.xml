@@ -136,6 +136,15 @@
     <ctl name="MultiMedia1 Mixer AFE_PCM_TX" value="0" />
     <ctl name="AFE_PCM_RX Audio Mixer MultiMedia5" value="0" />
     <!-- usb headset end -->
+    <!-- Audio BTSCO -->
+    <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia1" value="0" />
+    <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia4" value="0" />
+    <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia5" value="0" />
+    <ctl name="MultiMedia1 Mixer INTERNAL_BT_SCO_TX" value="0" />
+    <!-- Voice BTSCO -->
+    <ctl name="Internal BTSCO SampleRate" value="8000" />
+    <ctl name="INTERNAL_BT_SCO_RX_Voice Mixer CSVoice" value="0" />
+    <ctl name="INTERNAL_BT_SCO_RX Audio Mixer Multimedia6" value="0" />
 
     <!-- These are audio route (FE to BE) specific mixer settings -->
     <path name="deep-buffer-playback">
@@ -152,7 +161,7 @@
     </path>
 
     <path name="deep-buffer-playback bt-sco">
-        <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia1" value="1" />
+        <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia1" value="1" />
     </path>
 
     <path name="deep-buffer-playback afe-proxy">
@@ -177,7 +186,7 @@
     </path>
 
     <path name="low-latency-playback bt-sco">
-        <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia5" value="1" />
+        <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia5" value="1" />
     </path>
 
     <path name="low-latency-playback speaker-and-hdmi">
@@ -211,7 +220,7 @@
     </path>
 
     <path name="compress-offload-playback bt-sco">
-        <ctl name="SEC_AUX_PCM_RX Audio Mixer MultiMedia4" value="1" />
+        <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia4" value="1" />
     </path>
 
     <path name="compress-offload-playback speaker-and-hdmi">
@@ -241,7 +250,7 @@
     </path>
 
     <path name="audio-record bt-sco">
-        <ctl name="MultiMedia1 Mixer SEC_AUX_PCM_UL_TX" value="1" />
+        <ctl name="MultiMedia1 Mixer INTERNAL_BT_SCO_TX" value="1" />
     </path>
 
     <path name="low-latency-record">
@@ -259,8 +268,8 @@
     </path>
 
     <path name="voice-call bt-sco">
-        <ctl name="SEC_AUX_PCM_RX_Voice Mixer CSVoice" value="1" />
-        <ctl name="Voice_Tx Mixer SEC_AUX_PCM_TX_Voice" value="1" />
+        <ctl name="INTERNAL_BT_SCO_RX_Voice Mixer CSVoice" value="1" />
+        <ctl name="Voice_Tx Mixer INTERNAL_BT_SCO_TX_Voice" value="1" />
     </path>
 
     <!-- These are actual sound device specific mixer settings -->
