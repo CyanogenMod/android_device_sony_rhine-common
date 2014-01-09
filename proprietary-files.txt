@@ -112,7 +112,6 @@ etc/sec_config
 lib/camera/libexcal_halctrl_plugin.so
 lib/camera/libexcal_idtctrl_plugin.so
 lib/hw/camera.qcom.so:lib/hw/vendor-camera.qcom.so
-lib/hw/gps.default.so
 lib/hw/lights.default.so:lib/hw/vendor-lights.default.so
 lib/hw/nfc.msm8974.so
 lib/libMiscTaAccessor.so
@@ -143,14 +142,10 @@ lib/libface.so
 lib/libface_wrapper.so
 lib/libfmradio.so
 lib/libfmradio.sony-iris.so
-lib/libgps.utils.so
 lib/libidd.so
 lib/libkeyctrl.so
 lib/liblights-core.so
 lib/libloc_api_v02.so
-lib/libloc_core.so
-lib/libloc_ds_api.so
-lib/libloc_eng.so
 lib/libmiscta.so
 lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
@@ -312,7 +307,6 @@ vendor/lib/libdsutils.so
 vendor/lib/libfastcvopt.so
 vendor/lib/libgeofence.so
 vendor/lib/libidl.so
-vendor/lib/libizat_core.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegehw.so
 vendor/lib/libmm-abl-oem.so
@@ -355,4 +349,3 @@ vendor/lib/libssd.so
 vendor/lib/libsurround_proc.so
 vendor/lib/libthermalclient.so
 obj:vendor/lib/libtime_genoff.so
-vendor/lib/libulp2.so
