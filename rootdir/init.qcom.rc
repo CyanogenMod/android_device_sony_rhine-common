@@ -88,7 +88,7 @@ on fs
     chmod 0755 /data/etc
     start tad
     exec /sbin/wait4tad_static
-    exec /system/bin/taimport property
+    exec /system/bin/taimport
 
     restorecon -R /data/etc
 
