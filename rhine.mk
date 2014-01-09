@@ -71,9 +71,6 @@ PRODUCT_PACKAGES += \
     copybit.msm8974 \
     memtrack.msm8974
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.gralloc.cp.level3=1
-
 # NFC Support
 PRODUCT_PACKAGES += \
     libnfc \
@@ -190,9 +187,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.sensors.pedometer=true \
     ro.qualcomm.sensors.pam=false \
     ro.qualcomm.sensors.scrn_ortn=false
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.hwc.mdpcomp.enable=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.texture_cache_size=72 \
