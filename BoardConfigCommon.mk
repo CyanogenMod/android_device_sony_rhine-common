@@ -84,6 +84,15 @@ MAX_EGL_CACHE_SIZE := 2048*1024
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
+BOARD_SEPOLICY_DIRS += \
+    device/sony/rhine-common/sepolicy
+
+# The list below is order dependent
+BOARD_SEPOLICY_UNION := \
+    device.te \
+    app.te \
+    file_contexts
+
 # Audio
 BOARD_USES_ALSA_AUDIO := true
 
