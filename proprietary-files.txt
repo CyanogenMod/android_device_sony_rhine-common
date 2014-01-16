@@ -147,9 +147,8 @@ lib/libgps.utils.so
 lib/libidd.so
 lib/libkeyctrl.so
 lib/liblights-core.so
+lib/libloc_adapter.so
 lib/libloc_api_v02.so
-lib/libloc_core.so
-lib/libloc_ds_api.so
 lib/libloc_eng.so
 lib/libmiscta.so
 lib/libmmcamera_interface.so
@@ -310,9 +309,7 @@ vendor/lib/libdsi_netctrl.so
 vendor/lib/libdsnetutils.so
 vendor/lib/libdsutils.so
 vendor/lib/libfastcvopt.so
-vendor/lib/libgeofence.so
 vendor/lib/libidl.so
-vendor/lib/libizat_core.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegehw.so
 vendor/lib/libmm-abl-oem.so
@@ -355,4 +352,3 @@ vendor/lib/libssd.so
 vendor/lib/libsurround_proc.so
 vendor/lib/libthermalclient.so
 obj:vendor/lib/libtime_genoff.so
-vendor/lib/libulp2.so
