@@ -86,6 +86,7 @@ OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
+AUDIO_FEATURE_DISABLED_USBAUDIO := true
 
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
