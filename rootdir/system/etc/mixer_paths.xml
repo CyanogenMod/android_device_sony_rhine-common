@@ -289,14 +289,6 @@
         <ctl name="IIR1 INP1 MUX" value="DEC5" />
     </path>
 
-    <path name="adc3">
-        <ctl name="AIF1_CAP Mixer SLIM TX7" value="1"/>
-        <ctl name="SLIM_0_TX Channels" value="One" />
-        <ctl name="SLIM TX7 MUX" value="DEC4" />
-        <ctl name="DEC4 MUX" value="ADC3" />
-        <ctl name="IIR1 INP1 MUX" value="DEC4" />
-    </path>
-
     <path name="speaker">
         <ctl name="SLIM RX1 MUX" value="AIF1_PB" />
         <ctl name="SLIM_0_RX Channels" value="One" />
@@ -306,8 +298,8 @@
     </path>
 
     <path name="speaker-mic">
-        <path name="adc3" />
-        <ctl name="DEC4 Volume" value="99" />
+        <path name="adc1" />
+        <ctl name="DEC3 Volume" value="83" />
     </path>
 
     <path name="handset">
@@ -360,9 +352,9 @@
     </path>
 
     <path name="voice-speaker-mic">
-        <path name="adc3" />
-        <ctl name="ADC3 Volume" value="14" />
-        <ctl name="DEC4 Volume" value="97" />
+        <path name="adc1" />
+        <ctl name="ADC4 Volume" value="12" />
+        <ctl name="DEC3 Volume" value="83" />
     </path>
 
     <path name="voice-headphones">
