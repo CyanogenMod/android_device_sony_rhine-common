@@ -93,6 +93,9 @@ BOARD_SEPOLICY_UNION := \
     app.te \
     file_contexts
 
+# Kernel handles input boosting
+TARGET_POWERHAL_NO_TOUCH_BOOST := true
+
 # Audio
 BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_DISABLED_USBAUDIO := true
