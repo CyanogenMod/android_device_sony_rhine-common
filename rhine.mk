@@ -175,7 +175,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Audio offload
 PRODUCT_PROPERTY_OVERRIDES += \
     audio.offload.buffer.size.kb=32 \
-    audio.offload.gapless.enabled=true \
+    audio.offload.gapless.enabled=false \
     av.offload.enable=true
 
 # Enable AAC 5.1 output
