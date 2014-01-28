@@ -121,6 +121,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     mac-update
 
+# Qualcomm Random Numbers Generator
+PRODUCT_PACKAGES += \
+    qrngp
+
 # FM Radio
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/system/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh
