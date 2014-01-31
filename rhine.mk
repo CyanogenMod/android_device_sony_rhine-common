@@ -109,6 +109,13 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/system/etc/mixer_paths.xml:system/etc/mixer_paths.xml \
     $(COMMON_PATH)/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf
 
+# Voice Call
+PRODUCT_PACKAGES += \
+    persist.audio.dualmic.config=endfire \
+    persist.audio.fluence.voicecall=true \
+    persist.audio.fluence.voicerec=false \
+    persist.audio.fluence.speaker=false
+
 # BT
 PRODUCT_PACKAGES += \
     hci_qcomm_init
