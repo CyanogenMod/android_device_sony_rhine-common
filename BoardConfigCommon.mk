@@ -160,3 +160,6 @@ TW_MAX_BRIGHTNESS := 4095
 TW_NO_USB_STORAGE := true
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/sony/rhine-common
+
+# Vendor Init
+TARGET_INIT_VENDOR_LIB := libinit_rhine
