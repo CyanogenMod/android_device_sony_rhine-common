@@ -13,12 +13,12 @@
 # limitations under the License.
 
 # inherit from Sony common
--include device/sony/common/BoardConfigCommon.mk
+include device/sony/common/BoardConfigCommon.mk
 
 BOARD_EGL_CFG := device/sony/rhine-common/rootdir/system/lib/egl/egl.cfg
 
 # inherit from qcom-common
--include device/sony/qcom-common/BoardConfigCommon.mk
+include device/sony/qcom-common/BoardConfigCommon.mk
 
 TARGET_SPECIFIC_HEADER_PATH := device/sony/rhine-common/include
 
