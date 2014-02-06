@@ -453,8 +453,6 @@ on post-fs-data
     chmod 664 /sys/module/msm_mpdecision/slack_time_max_us
     chmod 664 /sys/module/msm_mpdecision/slack_time_min_us
 
-    write /sys/devices/platform/msm_sdcc.3/idle_timeout 10
-
     # SONY: Camera
     mkdir /data/camera 0770 media camera
     chown media camera /sys/devices/sony_camera_0/info
@@ -553,6 +551,7 @@ service qrngp /system/bin/qrngp
 
 on property:sys.boot_completed=1
     start qrngp
+    write /sys/block/mmcblk0/bdi/read_ahead_kb 512
 
 service qseecomd /system/bin/qseecomd
     class core
