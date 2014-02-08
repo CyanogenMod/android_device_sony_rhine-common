@@ -127,6 +127,9 @@ WIFI_DRIVER_FW_PATH_AP           := "ap"
 
 BOARD_USE_SONY_MACUPDATE := true
 
+# PowerHAL extension
+TARGET_POWERHAL_SET_INTERACTIVE_EXT := device/sony/rhine-common/power/power_ext.c
+
 # Filesystem
 BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USERIMAGES_USE_EXT4 := true
