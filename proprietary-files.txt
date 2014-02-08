@@ -105,6 +105,9 @@ etc/firmware/wcnss.b06
 etc/firmware/wcnss.b07
 etc/firmware/wcnss.b08
 etc/firmware/wcnss.mdt
+etc/firmware/c6x02/mba.b00
+etc/firmware/c6x02/modem.b01
+etc/firmware/c6x02/modem.mdt
 etc/hw_config.sh
 etc/pre_hw_config.sh
 etc/ramdump_ssr.xml
