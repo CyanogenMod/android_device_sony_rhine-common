@@ -95,6 +95,8 @@ BOARD_SEPOLICY_UNION := \
 
 # Kernel handles input boosting
 TARGET_POWERHAL_NO_TOUCH_BOOST := true
+# PowerHAL extension
+TARGET_POWERHAL_SET_INTERACTIVE_EXT := device/sony/rhine-common/power/power_ext.c
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
