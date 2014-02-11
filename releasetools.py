@@ -20,6 +20,12 @@ import os
 TARGET_DIR = os.getenv('OUT')
 TARGET_DEVICE = os.getenv('CM_BUILD')
 
+def FullOTA_Assertions(self):
+  if TARGET_DEVICE == "togari_gpe":
+    self.script.AppendExtra('assert(is_substring("GPE", getprop("ro.boot.s1boot")) == "t");')
+  if TARGET_DEVICE == "togari":
+    self.script.AppendExtra('assert(is_substring("GPE", getprop("ro.boot.s1boot")) != "t");')
+
 def FullOTA_InstallEnd(self):
   if TARGET_DEVICE == "honami" or TARGET_DEVICE == "togari":
     self.output_zip.write(os.path.join(TARGET_DIR, "c6x02.sh"), "c6x02.sh")
