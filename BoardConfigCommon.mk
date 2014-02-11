@@ -162,3 +162,5 @@ TW_NO_USB_STORAGE := true
 # Vendor Init
 TARGET_INIT_VENDOR_LIB := libinit_msm
 TARGET_LIBINIT_DEFINES_FILE := device/sony/rhine-common/init/init_rhine.c
+
+TARGET_RELEASETOOLS_EXTENSIONS := device/sony/rhine-common
