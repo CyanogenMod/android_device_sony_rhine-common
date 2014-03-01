@@ -14,6 +14,7 @@ bin/netmgrd
 bin/ptt_socket_app
 bin/qmuxd
 bin/qseecomd
+bin/radish
 bin/rmt_storage
 bin/sct_service
 bin/set_cabc
