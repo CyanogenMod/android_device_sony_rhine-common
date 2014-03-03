@@ -21,7 +21,7 @@ TARGET_DIR = os.getenv('OUT')
 TARGET_DEVICE = os.getenv('CM_BUILD')
 
 def FullOTA_InstallEnd(self):
-  if TARGET_DEVICE == "honami" or TARGET_DEVICE == "togari":
+  if TARGET_DEVICE == "honami" or TARGET_DEVICE == "togari" or TARGET_DEVICE == "amami":
     self.output_zip.write(os.path.join(TARGET_DIR, "c6x02.sh"), "c6x02.sh")
     self.script.AppendExtra('package_extract_file("c6x02.sh", "/tmp/c6x02.sh");')
     self.script.AppendExtra('set_perm(0, 0, 0777, "/tmp/c6x02.sh");')
