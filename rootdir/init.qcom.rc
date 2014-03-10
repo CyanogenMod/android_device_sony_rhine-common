@@ -319,6 +319,10 @@ on post-fs-data
     mkdir /dev/socket/mpdecision 0770 system system
     chmod 2770 /dev/socket/mpdecision
 
+    # allow system to write to the input settings
+    chown system system /sys/devices/virtual/input/clearpad/pen
+    chown system system /sys/devices/virtual/input/clearpad/glove
+
     # Enable Power modes and set the CPU Freq Sampling rates
     write /sys/module/lpm_resources/enable_low_power/l2 1
     write /sys/module/lpm_resources/enable_low_power/pxo 1
