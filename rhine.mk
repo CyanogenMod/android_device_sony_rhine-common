@@ -220,6 +220,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_large_cache_width=2048 \
     ro.hwui.text_large_cache_height=1024
 
+# Touchscreen
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.input.noresample=1
+
 # WFD
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.debug.wfd.enable=1 \
