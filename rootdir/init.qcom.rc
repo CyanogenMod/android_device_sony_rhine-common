@@ -76,12 +76,12 @@ on init
     setprop persist.sys.wfd.virtual 0
 
 on fs
-    mkdir /mnt/idd 0751 system system
+    mkdir /mnt/idd 0751 sony_idd sony_idd
 
     mount_all ./fstab.qcom
     setprop ro.crypto.fuse_sdcard true
 
-    chown system system /mnt/idd
+    chown sony_idd sony_idd /mnt/idd
     chmod 0751 /mnt/idd
 
     mkdir /lta-label 0555 system system
@@ -652,8 +652,8 @@ service mpdecision /system/bin/mpdecision --avg_comp
 
 service iddd /system/bin/iddd
     class core
-    user system
-    group system log
+    user sony_idd
+    group sony_idd log
 
 # Start suntrold
 service suntrold /system/bin/suntrold
