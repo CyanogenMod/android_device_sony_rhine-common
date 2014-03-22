@@ -87,6 +87,12 @@ BOARD_SEPOLICY_UNION := \
     app.te \
     file_contexts
 
+# Display
+TARGET_QCOM_DISPLAY_VARIANT := caf-new
+
+# Media
+TARGET_QCOM_MEDIA_VARIANT := caf-new
+
 # Audio
 BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_DISABLED_USBAUDIO := true
@@ -107,9 +113,6 @@ BLUETOOTH_HCI_USE_MCT := true
 
 # Time
 BOARD_USES_QC_TIME_SERVICES := true
-
-# Pre KK blob compat
-COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
