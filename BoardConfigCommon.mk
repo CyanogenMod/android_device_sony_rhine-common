@@ -50,6 +50,12 @@ BOARD_MKBOOTIMG_ARGS  := --ramdisk_offset 0x02000000 --tags_offset 0x01E00000
 BOARD_CUSTOM_BOOTIMG_MK := device/sony/rhine-common/custombootimg.mk
 BOARD_KERNEL_SEPARATED_DT := true
 
+# Qualcomm
+COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -DQCOM_BSP
+BOARD_USES_QCOM_HARDWARE := true
+TARGET_USES_QCOM_BSP := true
+TARGET_ENABLE_QC_AV_ENHANCEMENTS := true
+
 # Wifi
 BOARD_HAS_QCOM_WLAN              := true
 BOARD_WLAN_DEVICE                := qcwcn
