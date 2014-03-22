@@ -90,6 +90,12 @@ BOARD_SEPOLICY_UNION := \
 # Kernel handles input boosting
 TARGET_POWERHAL_NO_TOUCH_BOOST := true
 
+# Display
+TARGET_QCOM_DISPLAY_VARIANT := caf-new
+
+# Media
+TARGET_QCOM_MEDIA_VARIANT := caf-new
+
 # Audio
 BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_DISABLED_USBAUDIO := true
