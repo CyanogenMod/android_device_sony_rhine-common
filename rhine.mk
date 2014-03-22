@@ -46,7 +46,10 @@ PRODUCT_COPY_FILES += \
 
 # GPS
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/system/etc/gps.conf:system/etc/gps.conf
+    $(COMMON_PATH)/rootdir/system/etc/flp.conf:system/etc/flp.conf \
+    $(COMMON_PATH)/rootdir/system/etc/gps.conf:system/etc/gps.conf \
+    $(COMMON_PATH)/rootdir/system/etc/izat.conf:system/etc/izat.conf \
+    $(COMMON_PATH)/rootdir/system/etc/sap.conf:system/etc/sap.conf
 
 # WPA supplicant config
 PRODUCT_COPY_FILES += \
@@ -172,7 +175,10 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # GPS
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.gps.qc_nlp_in_use=0
+    persist.gps.qc_nlp_in_use=0 \
+    ro.gps.agps_provider=1 \
+    ro.qc.sdk.izat.premium_enabled=1 \
+    ro.qc.sdk.izat.service_mask=0x5
 
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
