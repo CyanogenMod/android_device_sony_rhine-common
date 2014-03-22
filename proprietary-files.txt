@@ -1,3 +1,4 @@
+app/com.qualcomm.location.apk
 bin/btnvtool
 bin/clearpad_fwloader
 bin/credmgrd
@@ -131,6 +132,7 @@ etc/firmware/wcnss.b07
 etc/firmware/wcnss.b08
 etc/firmware/wcnss.b09
 etc/firmware/wcnss.mdt
+etc/permissions/com.qualcomm.location.xml
 etc/hw_config.sh
 etc/iddd.conf
 etc/media_profiles.xml
@@ -179,6 +181,7 @@ lib/libkeyctrl.so
 lib/liblights-core.so
 lib/libloc_api_v02.so
 lib/libloc_core.so
+lib/libloc_ds_api.so
 lib/libloc_eng.so
 lib/libMiscTaAccessor.so
 lib/libmiscta.so
@@ -337,9 +340,13 @@ vendor/lib/libdsi_netctrl.so
 vendor/lib/libdsnetutils.so
 vendor/lib/libdsutils.so
 vendor/lib/libfastcvopt.so
+vendor/lib/libgeofence.so
 vendor/lib/libidl.so
+vendor/lib/libizat_core.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegehw.so
+vendor/lib/liblbs_core.so
+vendor/lib/liblocationservice.so
 vendor/lib/libmm-abl-oem.so
 vendor/lib/libmm-abl.so
 vendor/lib/libmmcamera2_c2d_module.so
@@ -379,9 +386,12 @@ vendor/lib/libqmiservices.so
 vendor/lib/libqmi.so
 vendor/lib/libqomx_jpegenc.so
 vendor/lib/libQSEEComAPI.so
+vendor/lib/libquipc_os_api.so
+vendor/lib/libquipc_ulp_adapter.so
 vendor/lib/libril-qc-qmi-1.so
 vendor/lib/librpmb.so
 vendor/lib/libsensor_reg.so
 vendor/lib/libssd.so
 vendor/lib/libthermalclient.so
 obj:vendor/lib/libtime_genoff.so
+vendor/lib/libulp2.so
