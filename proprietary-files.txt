@@ -144,6 +144,7 @@ lib/camera/libexcal_halctrl_plugin.so
 lib/camera/libexcal_idtctrl_plugin.so
 lib/hw/camera.qcom.so:lib/hw/vendor-camera.qcom.so
 lib/hw/gps.default.so
+lib/hw/keystore.qcom.so
 lib/hw/lights.default.so:lib/hw/vendor-lights.default.so
 lib/hw/nfc.msm8974.so
 lib/lib_asb_tee.so
@@ -230,6 +231,11 @@ lib/sysmon/sysmon_xo_therm.so
 usr/keylayout/gpio-keys.kl
 usr/keylayout/mhl-rcp.kl
 usr/keylayout/msm8974-taiko-mtp-snd-card_Button_Jack.kl
+vendor/firmware/keymaster/keymaster.b00
+vendor/firmware/keymaster/keymaster.b01
+vendor/firmware/keymaster/keymaster.b02
+vendor/firmware/keymaster/keymaster.b03
+vendor/firmware/keymaster/keymaster.mdt
 vendor/lib/hw/sensors.msm8974.so
 vendor/lib/libacdbloader.so
 vendor/lib/libacdbrtac.so
