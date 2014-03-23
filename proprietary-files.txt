@@ -26,7 +26,6 @@ bin/taimport
 bin/time_daemon
 bin/usbhub
 bin/usbhub_init
-bin/wcnss_service
 etc/Bluetooth_cal.acdb
 etc/General_cal.acdb
 etc/Global_cal.acdb

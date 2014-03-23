@@ -63,6 +63,10 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
     $(COMMON_PATH)/rootdir/system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
 
+# Wifi service
+PRODUCT_PACKAGES += \
+    wcnss_service
+
 # QCOM Display
 PRODUCT_PACKAGES += \
     hwcomposer.msm8974 \
