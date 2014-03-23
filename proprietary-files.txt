@@ -19,7 +19,6 @@ etc/acdbdata/MTP/MTP_Headset_cal.acdb
 
 # Audio
 etc/audio_policy.conf
-etc/mixer_paths_auxpcm.xml
 vendor/lib/libacdbloader.so
 vendor/lib/libacdbrtac.so
 vendor/lib/libadiertac.so
@@ -213,10 +212,6 @@ etc/firmware/venus.b04
 etc/firmware/venus.mbn
 etc/firmware/venus.mdt
 
-# CNE
-lib/libcnefeatureconfig.so
-vendor/lib/libNimsWrap.so
-
 # CPU
 bin/mpdecision
 vendor/lib/libthermalclient.so
@@ -283,7 +278,6 @@ lib/liblights-core.so
 etc/media_profiles.xml
 
 # Modem
-bin/ds_fmc_appd
 bin/netmgrd
 bin/qmuxd
 bin/rmt_storage
@@ -337,7 +331,6 @@ etc/firmware/cmnlib.mdt
 
 # Postproc
 bin/mm-pp-daemon
-bin/set_cabc
 vendor/lib/libmm-abl-oem.so
 vendor/lib/libmm-abl.so
 
@@ -395,10 +388,6 @@ etc/firmware/tzsuntory.b02
 etc/firmware/tzsuntory.b03
 etc/firmware/tzsuntory.mdt
 
-# SSR
-bin/ssrapp
-etc/ramdump_ssr.xml
-
 # TA
 bin/taimport
 bin/ta_param_loader
@@ -413,10 +402,6 @@ obj:vendor/lib/libtime_genoff.so
 
 # Touchscreen
 bin/clearpad_fwloader
-
-# USB
-bin/usbhub
-bin/usbhub_init
 
 # Sensors
 vendor/lib/hw/sensors.msm8974.so
@@ -462,7 +447,6 @@ lib/sysmon/sysmon_wlan_limit.so
 lib/sysmon/sysmon_xo_therm.so
 
 # WiFi
-bin/ptt_socket_app
 bin/radish
 bin/wcnss_service
 
