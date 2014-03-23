@@ -464,7 +464,6 @@ lib/sysmon/sysmon_xo_therm.so
 # WiFi
 bin/ptt_socket_app
 bin/radish
-bin/wcnss_service
 
 # WiFi firmware
 etc/firmware/wcnss.b00
