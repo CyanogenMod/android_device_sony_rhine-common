@@ -352,21 +352,10 @@ vendor/lib/libdrmtime.so
 vendor/lib/libQSEEComAPI.so
 
 # Security
-bin/credmgrd
-bin/iddd
-bin/idd-logreader
 bin/suntrold
-etc/cmsk.dat
-etc/iddd.conf
-etc/security/idd_config.pem
-etc/security/idd_report.pem
 lib/lib_asb_tee.so
-lib/libcredential-manager-service.so
 lib/libidd.so
 lib/libkeyctrl.so
-lib/lib_get_secure_mode.so
-vendor/lib/librpmb.so
-vendor/lib/libssd.so
 
 # Security firmware
 etc/firmware/tzlibasb.b00
