@@ -51,6 +51,9 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/system/etc/izat.conf:system/etc/izat.conf \
     $(COMMON_PATH)/rootdir/system/etc/sap.conf:system/etc/sap.conf
 
+PRODUCT_PACAKGES += \
+    com.qualcomm.location
+
 # WPA supplicant config
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/system/etc/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
