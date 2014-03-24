@@ -225,7 +225,7 @@ lib/libfmradio.so
 lib/libfmradio.sony-iris.so
 
 # GPS
-app/com.qualcomm.location.apk
+-app/com.qualcomm.location.apk
 bin/gsiff_daemon
 etc/permissions/com.qualcomm.location.xml
 lib/hw/gps.default.so
@@ -399,7 +399,7 @@ lib/libta.so
 
 # Time
 bin/time_daemon
-obj:vendor/lib/libtime_genoff.so
+-vendor/lib/libtime_genoff.so
 
 # Touchscreen
 bin/clearpad_fwloader
