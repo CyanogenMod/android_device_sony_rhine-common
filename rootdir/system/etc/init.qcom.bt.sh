@@ -62,11 +62,11 @@ case $LE_POWER_CLASS in
      logi "LE Power Class: To override, Before turning BT ON; setprop qcom.bt.le_dev_pwr_class <1 or 2 or 3>";;
 esac
 
-if [$BDADDR == ""]
+if [ -z "$BDADDR" ]
 then
-logwrapper /system/bin/hci_qcomm_init -e $PWR_CLASS $LE_PWR_CLASS -vv
+  logwrapper /system/bin/hci_qcomm_init -e $PWR_CLASS $LE_PWR_CLASS -vv
 else
-logwrapper /system/bin/hci_qcomm_init -b $BDADDR -e $PWR_CLASS $LE_PWR_CLASS -vv
+  logwrapper /system/bin/hci_qcomm_init -b $BDADDR -e $PWR_CLASS $LE_PWR_CLASS -vv
 fi
 
 case $? in
