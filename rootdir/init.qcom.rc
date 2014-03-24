@@ -664,23 +664,11 @@ service mpdecision /system/bin/mpdecision --avg_comp
     class main
     user root
 
-service iddd /system/bin/iddd
-    class core
-    user sony_idd
-    group sony_idd log
-
 # Start suntrold
 service suntrold /system/bin/suntrold
     user system
     group system
     oneshot
-    class main
-
-# Start Credential manager daemon
-service credmgrd /system/bin/credmgrd
-    user system
-    group system
-    socket credmgr stream 0660 system system
     class main
 
 # bugreport is triggered by holding down volume down, volume up and power
