@@ -46,13 +46,14 @@ PRODUCT_COPY_FILES += \
 
 # GPS
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/system/etc/flp.conf:system/etc/flp.conf \
-    $(COMMON_PATH)/rootdir/system/etc/gps.conf:system/etc/gps.conf \
-    $(COMMON_PATH)/rootdir/system/etc/izat.conf:system/etc/izat.conf \
-    $(COMMON_PATH)/rootdir/system/etc/sap.conf:system/etc/sap.conf
+    $(COMMON_PATH)/gps/flp.conf:system/etc/flp.conf \
+    $(COMMON_PATH)/gps/gps.conf:system/etc/gps.conf \
+    $(COMMON_PATH)/gps/izat.conf:system/etc/izat.conf \
+    $(COMMON_PATH)/gps/sap.conf:system/etc/sap.conf
 
 PRODUCT_PACKAGES += \
-    com.qualcomm.location
+    com.qualcomm.location \
+    gps.msm8974
 
 # WPA supplicant config
 PRODUCT_COPY_FILES += \
