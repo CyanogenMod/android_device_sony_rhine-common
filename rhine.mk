@@ -46,7 +46,14 @@ PRODUCT_COPY_FILES += \
 
 # GPS
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/system/etc/gps.conf:system/etc/gps.conf
+    $(COMMON_PATH)/gps/flp.conf:system/etc/flp.conf \
+    $(COMMON_PATH)/gps/gps.conf:system/etc/gps.conf \
+    $(COMMON_PATH)/gps/izat.conf:system/etc/izat.conf \
+    $(COMMON_PATH)/gps/sap.conf:system/etc/sap.conf
+
+PRODUCT_PACKAGES += \
+    com.qualcomm.location \
+    gps.msm8974
 
 # WPA supplicant config
 PRODUCT_COPY_FILES += \
@@ -73,6 +80,10 @@ PRODUCT_PACKAGES += \
     gralloc.msm8974 \
     copybit.msm8974 \
     memtrack.msm8974
+
+# Keystore
+PRODUCT_PACKAGES += \
+    keystore.msm8974
 
 # NFC Support
 PRODUCT_PACKAGES += \
@@ -108,24 +119,17 @@ PRODUCT_PACKAGES += \
     libaudio-resampler \
     tinymix
 
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/system/etc/mixer_paths.xml:system/etc/mixer_paths.xml \
-    $(COMMON_PATH)/rootdir/system/etc/audio_policy.conf:system/etc/audio_policy.conf
-
 # Voice Call
 PRODUCT_PACKAGES += \
+    ro.qc.sdk.audio.fluencetype=none \
     persist.audio.dualmic.config=endfire \
     persist.audio.fluence.voicecall=true \
     persist.audio.fluence.voicerec=false \
-    persist.audio.fluence.speaker=false
+    persist.audio.fluence.speaker=true
 
 # BT
 PRODUCT_PACKAGES += \
     hci_qcomm_init
-
-# Media
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/system/etc/media_profiles.xml:system/etc/media_profiles.xml
 
 # WIFI MAC update
 PRODUCT_PACKAGES += \
@@ -183,7 +187,10 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 
 # GPS
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.gps.qc_nlp_in_use=0
+    persist.gps.qc_nlp_in_use=0 \
+    ro.gps.agps_provider=1 \
+    ro.qc.sdk.izat.premium_enabled=1 \
+    ro.qc.sdk.izat.service_mask=0x0
 
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -207,9 +214,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sensors.max_accel_rate=false \
     ro.qc.sensors.max_gyro_rate=false \
     ro.qc.sensors.max_mag_rate=false \
-    ro.qualcomm.sensors.pedometer=true \
+    ro.qc.sensors.smgr_mag_cal_en=true \
+    ro.qualcomm.sensors.pedometer=false \
+    ro.qc.sensors.step_counter=true \
+    ro.qc.sensors.step_detector=true \
     ro.qualcomm.sensors.pam=false \
-    ro.qualcomm.sensors.scrn_ortn=false
+    ro.qualcomm.sensors.scrn_ortn=false \
+    ro.qualcomm.sensors.georv=true \
+    ro.qualcomm.sensors.smd=sony
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.texture_cache_size=72 \
@@ -227,6 +239,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Touchscreen
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.input.noresample=1
+
+# MDP
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.mdpcomp.maxpermixer=3 \
+    debug.mdpcomp.mixedmode.disable=1
+    debug.mdpcomp.logs=0 \
+    debug.mdpcomp.4k2kSplit=true
 
 # WFD
 PRODUCT_PROPERTY_OVERRIDES += \
