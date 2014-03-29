@@ -354,4 +354,4 @@ vendor/lib/libsensor_reg.so
 vendor/lib/libssd.so
 vendor/lib/libsurround_proc.so
 vendor/lib/libthermalclient.so
-obj:vendor/lib/libtime_genoff.so
+-vendor/lib/libtime_genoff.so
