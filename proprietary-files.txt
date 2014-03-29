@@ -1,11 +1,24 @@
 # ACDB
-etc/Bluetooth_cal.acdb
-etc/General_cal.acdb
-etc/Global_cal.acdb
-etc/Hdmi_cal.acdb
-etc/Headset_cal.acdb
+etc/acdbdata/Fluid/Fluid_Bluetooth_cal.acdb
+etc/acdbdata/Fluid/Fluid_General_cal.acdb
+etc/acdbdata/Fluid/Fluid_Global_cal.acdb
+etc/acdbdata/Fluid/Fluid_Handset_cal.acdb
+etc/acdbdata/Fluid/Fluid_Hdmi_cal.acdb
+etc/acdbdata/Fluid/Fluid_Headset_cal.acdb
+etc/acdbdata/Fluid/Fluid_Speaker_cal.acdb
+etc/acdbdata/Liquid/Liquid_Bluetooth_cal.acdb
+etc/acdbdata/Liquid/Liquid_General_cal.acdb
+etc/acdbdata/Liquid/Liquid_Global_cal.acdb
+etc/acdbdata/Liquid/Liquid_Hdmi_cal.acdb
+etc/acdbdata/Liquid/Liquid_Headset_cal.acdb
+etc/acdbdata/MTP/MTP_Bluetooth_cal.acdb
+etc/acdbdata/MTP/MTP_General_cal.acdb
+etc/acdbdata/MTP/MTP_Global_cal.acdb
+etc/acdbdata/MTP/MTP_Hdmi_cal.acdb
+etc/acdbdata/MTP/MTP_Headset_cal.acdb
 
 # Audio
+etc/audio_policy.conf
 vendor/lib/libacdbloader.so
 vendor/lib/libacdbrtac.so
 vendor/lib/libadiertac.so
@@ -30,6 +43,7 @@ vendor/lib/libadsprpc.so
 # Bluetooth
 bin/btnvtool
 bin/hci_qcomm_init
+vendor/lib/libbtnv.so
 
 # Camera
 bin/mm-qcamera-daemon
@@ -37,7 +51,9 @@ etc/firmware/cpp_firmware_v1_1_1.fw
 etc/firmware/cpp_firmware_v1_1_6.fw
 etc/firmware/cpp_firmware_v1_2_0.fw
 lib/hw/camera.qcom.so:lib/hw/vendor-camera.qcom.so
+lib/libals.so
 lib/libcamera_clientsemc.so
+lib/libcammw.so
 lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
 lib/libqomx_core.so
@@ -47,7 +63,6 @@ vendor/lib/libjpegehw.so
 vendor/lib/libmmcamera2_c2d_module.so
 vendor/lib/libmmcamera2_cpp_module.so
 vendor/lib/libmmcamera2_pproc_modules.so
-vendor/lib/libmmcamera2_stats_algorithm.so
 vendor/lib/libmmcamera2_vpe_module.so
 vendor/lib/libmmcamera2_wnr_module.so
 vendor/lib/libmmcamera_faceproc.so
@@ -61,6 +76,7 @@ vendor/lib/libmmcamera_tuning.so
 vendor/lib/libmmcamera_wavelet_lib.so
 vendor/lib/libmmjpeg.so
 vendor/lib/libmmqjpeg_codec.so
+vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc.so
 
 # Cacao
@@ -87,19 +103,6 @@ lib/libsomc_chokoballpal.so
 lib/libsony_chokoball.so
 
 # Chromatix
-vendor/lib/libchromatix_SKUAA_ST_gc0339_common.so
-vendor/lib/libchromatix_SKUAA_ST_gc0339_default_video.so
-vendor/lib/libchromatix_SKUAA_ST_gc0339_preview.so
-vendor/lib/libchromatix_SKUAB_ST_s5k4e1_common.so
-vendor/lib/libchromatix_SKUAB_ST_s5k4e1_default_video.so
-vendor/lib/libchromatix_SKUAB_ST_s5k4e1_hfr_120fps.so
-vendor/lib/libchromatix_SKUAB_ST_s5k4e1_hfr_60fps.so
-vendor/lib/libchromatix_SKUAB_ST_s5k4e1_hfr_90fps.so
-vendor/lib/libchromatix_SKUAB_ST_s5k4e1_liveshot.so
-vendor/lib/libchromatix_SKUAB_ST_s5k4e1_preview.so
-vendor/lib/libchromatix_SKUAB_ST_s5k4e1_snapshot.so
-vendor/lib/libchromatix_SKUAB_ST_s5k4e1_video_hd.so
-vendor/lib/libchromatix_SKUAB_ST_s5k4e1_zsl.so
 vendor/lib/libchromatix_imx134_common.so
 vendor/lib/libchromatix_imx134_default_video.so
 vendor/lib/libchromatix_imx134_hfr_120.so
@@ -128,12 +131,12 @@ vendor/lib/libchromatix_ov8825_default_video.so
 vendor/lib/libchromatix_ov8825_hfr_120fps.so
 vendor/lib/libchromatix_ov8825_hfr_60fps.so
 vendor/lib/libchromatix_ov8825_hfr_90fps.so
-vendor/lib/libchromatix_ov8825_liveshot.so
 vendor/lib/libchromatix_ov8825_liveshot_hd.so
-vendor/lib/libchromatix_ov8825_preview.so
+vendor/lib/libchromatix_ov8825_liveshot.so
 vendor/lib/libchromatix_ov8825_preview_hd.so
-vendor/lib/libchromatix_ov8825_snapshot.so
+vendor/lib/libchromatix_ov8825_preview.so
 vendor/lib/libchromatix_ov8825_snapshot_hd.so
+vendor/lib/libchromatix_ov8825_snapshot.so
 vendor/lib/libchromatix_ov8825_video_hd.so
 vendor/lib/libchromatix_ov8825_zsl.so
 vendor/lib/libchromatix_ov8865_q8v18a_common.so
@@ -160,12 +163,25 @@ vendor/lib/libchromatix_s5k3l1yx_preview.so
 vendor/lib/libchromatix_s5k3l1yx_snapshot.so
 vendor/lib/libchromatix_s5k3l1yx_video_hd.so
 vendor/lib/libchromatix_s5k3l1yx_zsl.so
+vendor/lib/libchromatix_SKUAA_ST_gc0339_common.so
+vendor/lib/libchromatix_SKUAA_ST_gc0339_default_video.so
+vendor/lib/libchromatix_SKUAA_ST_gc0339_preview.so
 vendor/lib/libchromatix_skuab_shinetech_gc0339_common.so
 vendor/lib/libchromatix_skuab_shinetech_gc0339_default_video.so
 vendor/lib/libchromatix_skuab_shinetech_gc0339_liveshot.so
 vendor/lib/libchromatix_skuab_shinetech_gc0339_preview.so
 vendor/lib/libchromatix_skuab_shinetech_gc0339_snapshot.so
 vendor/lib/libchromatix_skuab_shinetech_gc0339_zsl.so
+vendor/lib/libchromatix_SKUAB_ST_s5k4e1_common.so
+vendor/lib/libchromatix_SKUAB_ST_s5k4e1_default_video.so
+vendor/lib/libchromatix_SKUAB_ST_s5k4e1_hfr_120fps.so
+vendor/lib/libchromatix_SKUAB_ST_s5k4e1_hfr_60fps.so
+vendor/lib/libchromatix_SKUAB_ST_s5k4e1_hfr_90fps.so
+vendor/lib/libchromatix_SKUAB_ST_s5k4e1_liveshot.so
+vendor/lib/libchromatix_SKUAB_ST_s5k4e1_preview.so
+vendor/lib/libchromatix_SKUAB_ST_s5k4e1_snapshot.so
+vendor/lib/libchromatix_SKUAB_ST_s5k4e1_video_hd.so
+vendor/lib/libchromatix_SKUAB_ST_s5k4e1_zsl.so
 vendor/lib/libchromatix_skuf_ov12830_p12v01c_common.so
 vendor/lib/libchromatix_skuf_ov12830_p12v01c_default_video.so
 vendor/lib/libchromatix_skuf_ov12830_p12v01c_hfr_120fps.so
@@ -191,28 +207,36 @@ etc/firmware/venus.mdt
 
 # CPU
 bin/mpdecision
-vendor/lib/libqc-opt.so
 vendor/lib/libthermalclient.so
+vendor/lib/libqc-opt.so
 
 # FM
-bin/fm_qsoc_patches
 bin/fmconfig
+bin/fm_qsoc_patches
 lib/libfmradio.so
 lib/libfmradio.sony-iris.so
 
 # GPS
-lib/hw/gps.default.so
-lib/libgps.utils.so
-lib/libloc_adapter.so
+-app/com.qualcomm.location.apk
+bin/gsiff_daemon
+etc/permissions/com.qualcomm.location.xml
 lib/libloc_api_v02.so
-lib/libloc_eng.so
+lib/libloc_ds_api.so
+vendor/lib/hw/flp.default.so
+vendor/lib/libgeofence.so
+vendor/lib/libizat_core.so
+vendor/lib/liblbs_core.so
+vendor/lib/liblocationservice.so
+vendor/lib/libquipc_os_api.so
+vendor/lib/libquipc_ulp_adapter.so
+vendor/lib/libulp2.so
 
 # HDCP
-etc/firmware/dxhdcp2.b00
-etc/firmware/dxhdcp2.b01
-etc/firmware/dxhdcp2.b02
-etc/firmware/dxhdcp2.b03
-etc/firmware/dxhdcp2.mdt
+etc/firmware/tzhdcp.b00
+etc/firmware/tzhdcp.b01
+etc/firmware/tzhdcp.b02
+etc/firmware/tzhdcp.b03
+etc/firmware/tzhdcp.mdt
 
 # HW Config
 etc/hw_config.sh
@@ -227,9 +251,19 @@ usr/keylayout/gpio-keys.kl
 usr/keylayout/mhl-rcp.kl
 usr/keylayout/msm8974-taiko-mtp-snd-card_Button_Jack.kl
 
+# Keystore
+vendor/firmware/keymaster/keymaster.b00
+vendor/firmware/keymaster/keymaster.b01
+vendor/firmware/keymaster/keymaster.b02
+vendor/firmware/keymaster/keymaster.b03
+vendor/firmware/keymaster/keymaster.mdt
+
 # Lights
 lib/hw/lights.default.so:lib/hw/vendor-lights.default.so
 lib/liblights-core.so
+
+# Media config
+etc/media_profiles.xml
 
 # Modem
 bin/netmgrd
@@ -292,7 +326,6 @@ vendor/lib/libmm-abl.so
 vendor/lib/libqcci_legacy.so
 vendor/lib/libqdi.so
 vendor/lib/libqdp.so
-vendor/lib/libqmi.so
 vendor/lib/libqmi_cci.so
 vendor/lib/libqmi_client_qmux.so
 vendor/lib/libqmi_common_so.so
@@ -300,15 +333,17 @@ vendor/lib/libqmi_csi.so
 vendor/lib/libqmi_csvt_srvc.so
 vendor/lib/libqmi_encdec.so
 vendor/lib/libqmiservices.so
+vendor/lib/libqmi.so
 
 # QSEECOM
 bin/qseecomd
 vendor/lib/libdrmdiag.so
 vendor/lib/libdrmfs.so
 vendor/lib/libdrmtime.so
-lib/libQSEEComAPI.so
+vendor/lib/libQSEEComAPI.so
 
 # Security
+bin/suntrold
 lib/lib_asb_tee.so
 lib/libidd.so
 lib/libkeyctrl.so
@@ -319,6 +354,11 @@ etc/firmware/tzlibasb.b01
 etc/firmware/tzlibasb.b02
 etc/firmware/tzlibasb.b03
 etc/firmware/tzlibasb.mdt
+etc/firmware/tznautilus.b00
+etc/firmware/tznautilus.b01
+etc/firmware/tznautilus.b02
+etc/firmware/tznautilus.b03
+etc/firmware/tznautilus.mdt
 etc/firmware/tzsuntory.b00
 etc/firmware/tzsuntory.b01
 etc/firmware/tzsuntory.b02
@@ -326,9 +366,9 @@ etc/firmware/tzsuntory.b03
 etc/firmware/tzsuntory.mdt
 
 # TA
+bin/taimport
 bin/ta_param_loader
 bin/ta_qmi_service
-bin/taimport
 lib/libMiscTaAccessor.so
 lib/libmiscta.so
 lib/libta.so
@@ -342,39 +382,35 @@ bin/clearpad_fwloader
 
 # Sensors
 vendor/lib/hw/sensors.msm8974.so
-vendor/lib/libAKM8963.so
 vendor/lib/libsensor_reg.so
 
 # Sysmon
 bin/system_monitor
 lib/libprotobuf-c.so
-lib/libsys-utils.so
-lib/libsysmon.so
 lib/libsysmon_idd.so
+lib/libsysmon.so
+lib/libsys-utils.so
 lib/sysmon/sysmon_batt_therm.so
 lib/sysmon/sysmon_charge_current_limit_level.so
 lib/sysmon/sysmon_charging.so
 lib/sysmon/sysmon_corelimit.so
 lib/sysmon/sysmon_dc_current_limit_value.so
-lib/sysmon/sysmon_display_fps.so
 lib/sysmon/sysmon_emmc_therm.so
-lib/sysmon/sysmon_gamma.so
 lib/sysmon/sysmon_gpu_perflevel.so
 lib/sysmon/sysmon_lcd_brightness_level.so
 lib/sysmon/sysmon_modem_8974.so
-lib/sysmon/sysmon_msm_therm.so
 lib/sysmon/sysmon_msm_thermal_disable.so
+lib/sysmon/sysmon_msm_therm.so
 lib/sysmon/sysmon_pa_therm0.so
 lib/sysmon/sysmon_pa_therm1.so
 lib/sysmon/sysmon_perflevel.so
 lib/sysmon/sysmon_pm8941_tz.so
 lib/sysmon/sysmon_quiet_therm.so
-lib/sysmon/sysmon_rgb565.so
 lib/sysmon/sysmon_test_sensor.so
 lib/sysmon/sysmon_tsens_interrupt.so
 lib/sysmon/sysmon_tsens_tz_sensor0.so
-lib/sysmon/sysmon_tsens_tz_sensor1.so
 lib/sysmon/sysmon_tsens_tz_sensor10.so
+lib/sysmon/sysmon_tsens_tz_sensor1.so
 lib/sysmon/sysmon_tsens_tz_sensor2.so
 lib/sysmon/sysmon_tsens_tz_sensor3.so
 lib/sysmon/sysmon_tsens_tz_sensor4.so
@@ -398,25 +434,5 @@ etc/firmware/wcnss.b04
 etc/firmware/wcnss.b06
 etc/firmware/wcnss.b07
 etc/firmware/wcnss.b08
+etc/firmware/wcnss.b09
 etc/firmware/wcnss.mdt
-
-# Potentially Unused
-bin/acc_cal_data_manager
-bin/cal_data_manager
-bin/ds_fmc_appd
-bin/ptt_socket_app
-bin/set_cabc
-bin/ssrapp
-bin/usbhub
-bin/usbhub_init
-etc/ramdump_ssr.xml
-lib/lib_get_secure_mode.so
-lib/libals.so
-lib/libcammw.so
-lib/libcnefeatureconfig.so
-lib/libcredential-manager-service.so
-vendor/lib/libNimsWrap.so
-vendor/lib/libcsd-client.so
-vendor/lib/librpmb.so
-vendor/lib/libssd.so
-vendor/lib/libsurround_proc.so

@@ -76,8 +76,13 @@ on init
     setprop persist.sys.wfd.virtual 0
 
 on fs
+    mkdir /mnt/idd 0751 sony_idd sony_idd
+
     mount_all ./fstab.qcom
     setprop ro.crypto.fuse_sdcard true
+
+    chown sony_idd sony_idd /mnt/idd
+    chmod 0751 /mnt/idd
 
     mkdir /lta-label 0555 system system
     wait /dev/block/platform/msm_sdcc.1/by-name/LTALabel
@@ -252,6 +257,9 @@ on post-fs
     exec /system/bin/chargemon
     write /sys/class/power_supply/battery/enable_stop_charging_at_low_battery 1
 
+    # Change to socket location on libkeyctrl/suntory for /data encryption
+    mkdir /dev/socket/suntory 0755 system system
+
 # msm specific files that need to be created on /data
 on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
@@ -268,6 +276,7 @@ on post-fs-data
     mkdir /data/misc/wifi/prima 0775 wifi wifi
     exec /system/bin/mac-update
 
+    mkdir /data/credmgr 0700 system system
     mkdir /data/tombstones 0755 system system
     mkdir /data/tombstones/vendor 0755 system system
     mkdir /data/pc 0700 radio radio
@@ -297,6 +306,14 @@ on post-fs-data
 
     # Create directories for gpsone_daemon services
     mkdir /data/misc/gpsone_d 0770 system gps
+
+    # Create directories for QuIPS
+    mkdir /data/misc/quipc 0770 gps system
+
+    # Create directories for Location services
+    mkdir /data/misc/location 0770 gps gps
+    mkdir /data/misc/location/mq 0770 gps gps
+    mkdir /data/misc/location/xtwifi 0770 gps gps
 
     # Provide the access to hostapd.conf only to root and group
     chmod 0660 /data/hostapd/hostapd.conf
@@ -537,6 +554,12 @@ service updatemiscta /system/bin/updatemiscta
 service netmgrd /system/bin/netmgrd
     class main
 
+# start GNS/Sensor interface daemon
+service gsiff_daemon /system/bin/gsiff_daemon
+    class late_start
+    user gps
+    group gps net_raw misc
+
 service qrngd /system/bin/qrngd -f
     class main
     user root
@@ -641,6 +664,13 @@ service mpdecision /system/bin/mpdecision --avg_comp
     class main
     user root
 
+# Start suntrold
+service suntrold /system/bin/suntrold
+    user system
+    group system
+    oneshot
+    class main
+
 # bugreport is triggered by holding down volume down, volume up and power
 service bugreport /system/bin/dumpstate -d -p -B \
         -o /data/data/com.android.shell/files/bugreports/bugreport
@@ -726,18 +756,6 @@ service ptt_socket_app /system/bin/ptt_socket_app
     user system
     group system
     oneshot
-
-on property:service.acccalib.start=service_setting
-    exec /system/bin/acc_cal_data_manager service_setting
-
-on property:service.calib.start=service_setting
-    exec /system/bin/cal_data_manager service_setting
-
-on property:service.proxcalib.start=service_setting
-    exec /system/bin/prox_cal_data_manager service_setting
-
-on property:service.proxcalib.start=service_setting_default
-    exec /system/bin/prox_cal_data_manager service_setting_default
 
 on property:init.svc.surfaceflinger=running
     start ppd
