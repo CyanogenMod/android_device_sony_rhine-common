@@ -21,11 +21,6 @@ COMMON_PATH := device/sony/rhine-common
 
 DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay
 
-ifneq ($(BOARD_HAVE_RADIO),false)
-    DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay-radio
-    $(call inherit-product, $(COMMON_PATH)/radio.mk)
-endif
-
 # Permissions
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.audio.low_latency.xml:system/etc/permissions/android.hardware.audio.low_latency.xml \
@@ -44,6 +39,54 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.google.android.nfc_extras.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml
 
+# Init
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/fstab.qcom:root/fstab.qcom \
+    $(COMMON_PATH)/rootdir/init.qcom.rc:root/init.qcom.rc \
+    $(COMMON_PATH)/rootdir/init.recovery.qcom.rc:root/init.recovery.qcom.rc \
+    $(COMMON_PATH)/rootdir/system/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh \
+    $(COMMON_PATH)/rootdir/ueventd.qcom.rc:root/ueventd.qcom.rc
+
+# Recovery
+PRODUCT_PACKAGES += \
+    extract_elf_ramdisk
+
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/recovery/c6x02.sh:c6x02.sh
+
+# Sbin
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/charger:root/charger \
+    $(COMMON_PATH)/rootdir/sbin/wait4tad_static:root/sbin/wait4tad_static \
+    $(COMMON_PATH)/rootdir/sbin/tad_static:root/sbin/tad_static
+
+# Audio
+PRODUCT_PACKAGES += \
+    audio.primary.msm8974 \
+    audio.a2dp.default \
+    audio.usb.default \
+    audio.r_submix.default \
+    libaudio-resampler \
+    tinymix
+
+# Display
+PRODUCT_PACKAGES += \
+    hwcomposer.msm8974 \
+    gralloc.msm8974 \
+    copybit.msm8974 \
+    memtrack.msm8974
+
+# Filesystem management tools
+PRODUCT_PACKAGES += \
+    e2fsck
+
+# FM Radio
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/system/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh
+
 # GPS
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/gps/flp.conf:system/etc/flp.conf \
@@ -55,37 +98,11 @@ PRODUCT_PACKAGES += \
     com.qualcomm.location \
     gps.msm8974
 
-# WPA supplicant config
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/system/etc/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
-    $(COMMON_PATH)/rootdir/system/etc/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
-
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/fstab.qcom:root/fstab.qcom
-
-# Wifi config and firmware
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/system/etc/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh \
-    $(COMMON_PATH)/rootdir/system/etc/firmware/wlan/prima/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
-    $(COMMON_PATH)/rootdir/system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
-    $(COMMON_PATH)/rootdir/system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
-
-# Wifi service
-PRODUCT_PACKAGES += \
-    wcnss_service
-
-# QCOM Display
-PRODUCT_PACKAGES += \
-    hwcomposer.msm8974 \
-    gralloc.msm8974 \
-    copybit.msm8974 \
-    memtrack.msm8974
-
 # Keystore
 PRODUCT_PACKAGES += \
     keystore.msm8974
 
-# NFC Support
+# NFC
 PRODUCT_PACKAGES += \
     libnfc \
     libnfc_jni \
@@ -106,91 +123,36 @@ endif
 PRODUCT_COPY_FILES += \
     $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml
 
-# Recovery
+# Qualcomm Random Number Generator
 PRODUCT_PACKAGES += \
-    extract_elf_ramdisk
-
-# Audio
-PRODUCT_PACKAGES += \
-    audio.primary.msm8974 \
-    audio.a2dp.default \
-    audio.usb.default \
-    audio.r_submix.default \
-    libaudio-resampler \
-    tinymix
-
-# Voice Call
-PRODUCT_PACKAGES += \
-    ro.qc.sdk.audio.fluencetype=none \
-    persist.audio.dualmic.config=endfire \
-    persist.audio.fluence.voicecall=true \
-    persist.audio.fluence.voicerec=false \
-    persist.audio.fluence.speaker=true
-
-# BT
-PRODUCT_PACKAGES += \
-    hci_qcomm_init
-
-# WIFI MAC update
-PRODUCT_PACKAGES += \
-    mac-update
-
-# Qualcomm Random Numbers Generator
-PRODUCT_PACKAGES += \
+    qrngd \
     qrngp
 
-# FM Radio
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/system/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh
-
-# Misc
+# USB
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
 
-# Live Wallpapers
+# WiFi
 PRODUCT_PACKAGES += \
-    LiveWallpapers \
-    LiveWallpapersPicker \
-    VisualizationWallpapers \
-    librs_jni
-
-# Filesystem management tools
-PRODUCT_PACKAGES += \
-    e2fsck
-
-# We have enough storage space to hold precise GC data
-PRODUCT_TAGS += dalvik.gc.type-precise
-
-# Custom init / uevent
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/init.qcom.rc:root/init.qcom.rc \
-    $(COMMON_PATH)/rootdir/ueventd.qcom.rc:root/ueventd.qcom.rc \
-    $(COMMON_PATH)/rootdir/init.recovery.qcom.rc:root/init.recovery.qcom.rc \
-    $(COMMON_PATH)/rootdir/system/etc/init.qcom.bt.sh:system/etc/init.qcom.bt.sh
-
-# Post recovery script
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/recovery/postrecoveryboot.sh:recovery/root/sbin/postrecoveryboot.sh
-
-# Additional sbin stuff
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/charger:root/charger \
-    $(COMMON_PATH)/rootdir/sbin/wait4tad_static:root/sbin/wait4tad_static \
-    $(COMMON_PATH)/rootdir/sbin/tad_static:root/sbin/tad_static
+    mac-update \
+    wcnss_service
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/recovery/c6x02.sh:c6x02.sh
+    $(COMMON_PATH)/rootdir/system/etc/wifi/wpa_supplicant_overlay.conf:system/etc/wifi/wpa_supplicant_overlay.conf \
+    $(COMMON_PATH)/rootdir/system/etc/wifi/p2p_supplicant_overlay.conf:system/etc/wifi/p2p_supplicant_overlay.conf
+
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/system/etc/init.qcom.wifi.sh:system/etc/init.qcom.wifi.sh \
+    $(COMMON_PATH)/rootdir/system/etc/firmware/wlan/prima/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
+    $(COMMON_PATH)/rootdir/system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
+    $(COMMON_PATH)/rootdir/system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp
 
-# GPS
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.gps.qc_nlp_in_use=0 \
-    ro.gps.agps_provider=1 \
-    ro.qc.sdk.izat.premium_enabled=1 \
-    ro.qc.sdk.izat.service_mask=0x0
+# We have enough storage space to hold precise GC data
+PRODUCT_TAGS += dalvik.gc.type-precise
 
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -205,6 +167,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Enable AAC 5.1 output
 PRODUCT_PROPERTY_OVERRIDES += \
     media.aac_51_output_enabled=true
+
+# Voice Call
+PRODUCT_PACKAGES += \
+    ro.qc.sdk.audio.fluencetype=none \
+    persist.audio.dualmic.config=endfire \
+    persist.audio.fluence.voicecall=true \
+    persist.audio.fluence.voicerec=false \
+    persist.audio.fluence.speaker=true
 
 # aDSP
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -236,9 +206,20 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.hwui.text_large_cache_width=2048 \
     ro.hwui.text_large_cache_height=1024
 
-# Touchscreen
+# Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.input.noresample=1
+    ro.qualcomm.bt.hci_transport=smd
+
+# GPS
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.gps.qc_nlp_in_use=0 \
+    ro.gps.agps_provider=1 \
+    ro.qc.sdk.izat.premium_enabled=1 \
+    ro.qc.sdk.izat.service_mask=0x0
+
+# HDMI
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.demo.hdmirotationlock=false
 
 # MDP
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -247,22 +228,24 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.mdpcomp.logs=0 \
     debug.mdpcomp.4k2kSplit=true
 
-# WFD
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.debug.wfd.enable=1 \
-    persist.sys.wfd.virtual=0
-
-# HDMI
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.demo.hdmirotationlock=false
+# Radio
+ifneq ($(BOARD_HAVE_RADIO),false)
+    DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay-radio
+    $(call inherit-product, $(COMMON_PATH)/radio.mk)
+endif
 
 # Time
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.timed.enable=true
 
-# Bluetooth
+# Touchscreen
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.qualcomm.bt.hci_transport=smd
+    ro.input.noresample=1
+
+# WFD
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.debug.wfd.enable=1 \
+    persist.sys.wfd.virtual=0
 
 # Include non-opensource parts
 $(call inherit-product, vendor/sony/rhine-common/rhine-common-vendor.mk)
