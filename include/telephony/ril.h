@@ -4315,7 +4315,7 @@ typedef struct {
  * "data" is const RIL_StkCcUnsolSsResponse *
  *
  */
-#define RIL_UNSOL_ON_SS 1038
+#define RIL_UNSOL_ON_SS 1039
 
 
 /**
@@ -4326,7 +4326,7 @@ typedef struct {
  * "data" is const char * containing ALPHA string from UICC in UTF-8 format.
  *
  */
-#define RIL_UNSOL_STK_CC_ALPHA_NOTIFY 1039
+#define RIL_UNSOL_STK_CC_ALPHA_NOTIFY 1040
 
 /**
  * RIL_UNSOL_UICC_SUBSCRIPTION_STATUS_CHANGED
@@ -4342,9 +4342,11 @@ typedef struct {
  * ((const int *)data)[0] == 1 for Subscription Activated
  *
  */
-#define RIL_UNSOL_UICC_SUBSCRIPTION_STATUS_CHANGED 1040
+#define RIL_UNSOL_UICC_SUBSCRIPTION_STATUS_CHANGED 1041
 /***********************************************************************/
 
+/* COMPATIBILITY WITH MAINLINE */
+#define RIL_REQUEST_ENTER_NETWORK_DEPERSONALIZATION RIL_REQUEST_ENTER_DEPERSONALIZATION_CODE
 
 /**
  * RIL_Request Function pointer
