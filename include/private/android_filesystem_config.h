@@ -86,6 +86,7 @@
 
 // SONY_UIDS
 #define AID_SONY_IDD      2987  /* IDD */
+#define AID_SONY_TA       2993  /* TrimArea */
 
 /* The 3000 series are intended for use as supplemental group id's only.
  * They indicate special Android capabilities that the kernel is aware of. */
@@ -193,6 +194,7 @@ static const struct android_id_info android_ids[] = {
 
 // SONY_UIDS
     { "sony_idd",      AID_SONY_IDD, },
+    { "sony_ta",       AID_SONY_TA, },
 
 #if defined(MOTOROLA_UIDS)
     { "mot_osh",   AID_MOT_OSH, },
