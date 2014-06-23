@@ -31,7 +31,6 @@ TARGET_BOARD_PLATFORM := msm8974
 BOARD_VENDOR_PLATFORM := rhine
 
 # Architecture
-TARGET_ARCH_VARIANT_CPU := cortex-a9
 TARGET_CPU_VARIANT := krait
 
 # Flags
