@@ -50,7 +50,7 @@ bin/mm-qcamera-daemon
 etc/firmware/cpp_firmware_v1_1_1.fw
 etc/firmware/cpp_firmware_v1_1_6.fw
 etc/firmware/cpp_firmware_v1_2_0.fw
-lib/hw/camera.qcom.so:lib/hw/vendor-camera.qcom.so
+lib/hw/camera.qcom.so:lib/hw/camera.vendor.qcom.so
 lib/libals.so
 lib/libcamera_clientsemc.so
 lib/libcammw.so
@@ -259,7 +259,7 @@ vendor/firmware/keymaster/keymaster.b03
 vendor/firmware/keymaster/keymaster.mdt
 
 # Lights
-lib/hw/lights.default.so:lib/hw/vendor-lights.default.so
+lib/hw/lights.default.so:lib/hw/lights.vendor.default.so
 lib/liblights-core.so
 
 # Media config
