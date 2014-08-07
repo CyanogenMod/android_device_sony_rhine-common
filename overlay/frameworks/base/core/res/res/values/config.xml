@@ -141,9 +141,6 @@
          movement threshold where scrolling should begin. -->
     <dimen name="config_viewConfigurationTouchSlop">13dp</dimen>
 
-    <!-- Enable lockscreen translucent decor -->
-    <bool name="config_enableLockScreenTranslucentDecor">true</bool>
-
     <!-- Defines the system property to set for performance profile xe: sys.cpu.modes. Leave it
          blank if the device do not support performance profiles -->
     <string name="config_perf_profile_prop" translatable="false">sys.perf.profile</string>
