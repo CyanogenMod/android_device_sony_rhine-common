@@ -67,10 +67,12 @@ PRODUCT_COPY_FILES += \
 
 # Audio
 PRODUCT_PACKAGES += \
-    audio.primary.msm8974 \
+    audiod \
     audio.a2dp.default \
-    audio.usb.default \
+    audio.primary.msm8974 \
     audio.r_submix.default \
+    audio.usb.default \
+    audio_policy.msm8974 \
     libaudio-resampler \
     tinymix
 
