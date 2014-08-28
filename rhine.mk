@@ -185,7 +185,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     media.aac_51_output_enabled=true
 
 # Voice Call
-PRODUCT_PACKAGES += \
+PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.audio.fluencetype=none \
     persist.audio.dualmic.config=endfire \
     persist.audio.fluence.voicecall=true \
