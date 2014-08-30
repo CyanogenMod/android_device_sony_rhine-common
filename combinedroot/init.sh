@@ -30,6 +30,7 @@ busybox mount -t sysfs sysfs /sys
 busybox echo 255 > ${BOOTREC_LED_RED}
 busybox echo 0 > ${BOOTREC_LED_GREEN}
 busybox echo 255 > ${BOOTREC_LED_BLUE}
+busybox echo 50 > /sys/class/timed_output/vibrator/enable
 
 # keycheck
 busybox cat ${BOOTREC_EVENT} > /dev/keycheck&
@@ -40,24 +41,24 @@ load_image=/sbin/ramdisk.cpio
 
 # boot decision
 if [ -s /dev/keycheck ] || busybox grep -q warmboot=0x77665502 /proc/cmdline ; then
-	busybox echo 'RECOVERY BOOT' >>boot.txt
-	# orange led for recoveryboot
-	busybox echo 255 > ${BOOTREC_LED_RED}
-	busybox echo 100 > ${BOOTREC_LED_GREEN}
-	busybox echo 0 > ${BOOTREC_LED_BLUE}
-	# recovery ramdisk
-	busybox mknod -m 600 ${BOOTREC_FOTA_NODE}
-	busybox mount -o remount,rw /
-	busybox ln -sf /sbin/busybox /sbin/sh
-	extract_elf_ramdisk -i ${BOOTREC_FOTA} -o /sbin/ramdisk-recovery.cpio -t / -c
-	busybox rm /sbin/sh
-	load_image=/sbin/ramdisk-recovery.cpio
+    busybox echo 'RECOVERY BOOT' >>boot.txt
+    # orange led for recoveryboot
+    busybox echo 255 > ${BOOTREC_LED_RED}
+    busybox echo 100 > ${BOOTREC_LED_GREEN}
+    busybox echo 0 > ${BOOTREC_LED_BLUE}
+    # recovery ramdisk
+    busybox mknod -m 600 ${BOOTREC_FOTA_NODE}
+    busybox mount -o remount,rw /
+    busybox ln -sf /sbin/busybox /sbin/sh
+    extract_elf_ramdisk -i ${BOOTREC_FOTA} -o /sbin/ramdisk-recovery.cpio -t / -c
+    busybox rm /sbin/sh
+    load_image=/sbin/ramdisk-recovery.cpio
 else
-	busybox echo 'ANDROID BOOT' >>boot.txt
-	# poweroff LED
-	busybox echo 0 > ${BOOTREC_LED_RED}
-	busybox echo 0 > ${BOOTREC_LED_GREEN}
-	busybox echo 0 > ${BOOTREC_LED_BLUE}
+    busybox echo 'ANDROID BOOT' >>boot.txt
+    # poweroff LED
+    busybox echo 0 > ${BOOTREC_LED_RED}
+    busybox echo 0 > ${BOOTREC_LED_GREEN}
+    busybox echo 0 > ${BOOTREC_LED_BLUE}
 fi
 
 # kill the keycheck process
