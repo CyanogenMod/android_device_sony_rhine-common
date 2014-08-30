@@ -30,6 +30,7 @@ busybox mount -t sysfs sysfs /sys
 busybox echo 255 > ${BOOTREC_LED_RED}
 busybox echo 0 > ${BOOTREC_LED_GREEN}
 busybox echo 255 > ${BOOTREC_LED_BLUE}
+busybox echo 50 > /sys/class/timed_output/vibrator/enable
 
 # keycheck
 busybox cat ${BOOTREC_EVENT} > /dev/keycheck&
