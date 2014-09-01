@@ -1,0 +1,137 @@
+#
+# Copyright 2014 The CyanogenMod Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+import init.device.rc
+
+on init
+    # SONY: Start the TrimArea Daemon.
+    class_start sony_ta
+    exec /sbin/wait4tad_static
+
+on fs
+    mkdir /lta-label 0555 system system
+    wait /dev/block/platform/msm_sdcc.1/by-name/LTALabel
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/LTALabel /lta-label nosuid nodev noatime noexec ro barrier=0
+    chown system system /lta-label
+    chmod 0555 /lta-label
+
+    # SONY: Start early TA-users
+    exec /system/bin/taimport
+
+    mkdir /mnt/idd 0751 sony_idd sony_idd
+
+    mount_all ./fstab.qcom
+    setprop ro.crypto.fuse_sdcard true
+
+    chown sony_idd sony_idd /mnt/idd
+    chmod 0751 /mnt/idd
+    exec /system/bin/rm -r /mnt/idd/lost+found
+    mkdir /mnt/idd/lost+found 0770 root root
+
+on post-fs
+    # Change to socket location on libkeyctrl/suntory for /data encryption
+    mkdir /dev/socket/suntory 0755 system system
+
+    exec /system/bin/chargemon
+    write /sys/class/power_supply/battery/enable_stop_charging_at_low_battery 1
+
+on post-fs-data
+    # Remove lost+found in user and userdebug
+    exec /system/bin/rm -r /data/lost+found
+    mkdir /data/lost+found 0770 root root
+
+    exec /system/bin/rm -r /cache/lost+found
+    mkdir /cache/lost+found 0770 root root
+
+    exec /system/bin/rm -r /mnt/idd/lost+found
+    mkdir /mnt/idd/lost+found 0770 root root
+
+    # SONY: Camera
+    mkdir /data/camera 0770 media camera
+    chown media camera /sys/devices/sony_camera_0/info
+    chmod 0770 /sys/devices/sony_camera_0/info
+    chown media camera /sys/devices/sony_camera_1/info
+    chmod 0770 /sys/devices/sony_camera_1/info
+
+    # Update WIFI MAC address
+    mkdir /data/misc/wifi/prima 0775 wifi wifi
+    exec /system/bin/mac-update
+
+    # IR Blaster
+    chown system system /dev/ttyHSL2
+    chmod 0660 /dev/ttyHSL2
+    chown system system /sys/devices/platform/ir_remote_control/enable
+    chmod 0220 /sys/devices/platform/ir_remote_control/enable
+
+on early-boot
+    exec /system/bin/sh /system/etc/pre_hw_config.sh
+
+on boot
+    # Change owner and group to get adopter/device ids from MHL driver
+    chown system system /sys/class/mhl/sii8334/adopter_id
+    chown system system /sys/class/mhl/sii8334/device_id
+
+# SONY: TrimArea Daemon
+# Last 2 args: start block(blk size 128k), number of blocks(partitionsize(kb)/128(kb))
+service tad_static /sbin/tad_static /dev/block/mmcblk0 1,16
+    user root
+    group root
+    socket tad stream 0660 system sony_ta
+    class sony_ta
+
+service updatemiscta /system/bin/updatemiscta
+    class main
+    user root
+    oneshot
+
+# Trim Area QMI service
+service ta_qmi_service /system/bin/ta_qmi_service
+    user root
+    disabled
+
+# Secure Config Transfer service
+service sct_service /system/bin/sct_service
+    user root
+    disabled
+
+service scd /system/bin/scd
+    class main
+    user system
+    group system
+
+# Start suntrold
+service suntrold /system/bin/suntrold
+    user system
+    group system
+    oneshot
+    class main
+
+# Start system_monitor
+service system_monitor /system/bin/system_monitor
+    socket sysmon stream 0660 root system
+    class core
+    user root
+
+# Update WIFI MAC address
+service mac-update /system/bin/mac-update
+    class main
+    user wifi
+    oneshot
+
+service illumination /system/bin/illumination_service
+    socket illumination stream 0660 system camera
+    class main
+    user root
