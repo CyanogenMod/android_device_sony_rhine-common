@@ -352,10 +352,7 @@ on post-fs-data
 
 on charger
     # Enable Power modes and set the CPU Freq Sampling rates
-    write /sys/module/lpm_resources/enable_low_power/l2 4
-    write /sys/module/lpm_resources/enable_low_power/pxo 1
-    write /sys/module/lpm_resources/enable_low_power/vdd_dig 1
-    write /sys/module/lpm_resources/enable_low_power/vdd_mem 1
+    write /sys/module/lpm_levels/enable_low_power/l2 4
     write /sys/module/msm_pm/modes/cpu0/retention/idle_enabled 1
     write /sys/module/msm_pm/modes/cpu0/power_collapse/suspend_enabled 1
     write /sys/module/msm_pm/modes/cpu1/power_collapse/suspend_enabled 1
@@ -385,10 +382,7 @@ on charger
 
 on property:service.bootanim.exit=1
     # Enable Power modes and set the CPU Freq Sampling rates
-    write /sys/module/lpm_resources/enable_low_power/l2 4
-    write /sys/module/lpm_resources/enable_low_power/pxo 1
-    write /sys/module/lpm_resources/enable_low_power/vdd_dig 1
-    write /sys/module/lpm_resources/enable_low_power/vdd_mem 1
+    write /sys/module/lpm_levels/enable_low_power/l2 4
     write /sys/module/msm_pm/modes/cpu0/power_collapse/suspend_enabled 1
     write /sys/module/msm_pm/modes/cpu1/power_collapse/suspend_enabled 1
     write /sys/module/msm_pm/modes/cpu2/power_collapse/suspend_enabled 1
