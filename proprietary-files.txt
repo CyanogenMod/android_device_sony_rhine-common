@@ -43,6 +43,9 @@ etc/firmware/adsp.b11
 etc/firmware/adsp.mdt
 vendor/lib/libadsprpc.so
 
+# ANT+
+etc/permissions/com.dsi.ant.antradio_library.xml
+
 # Bluetooth
 bin/btnvtool
 bin/hci_qcomm_init
