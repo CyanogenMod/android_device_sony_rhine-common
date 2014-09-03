@@ -75,6 +75,9 @@ on init
     # session is not exercised through RemoteDisplay in the android framework
     setprop persist.sys.wfd.virtual 0
 
+    # Clear Sony boot splash
+    write /sys/class/graphics/fb0/blank 1
+
 on fs
     mkdir /mnt/idd 0751 sony_idd sony_idd
 
