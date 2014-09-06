@@ -15,10 +15,21 @@
 
 """Custom OTA Package commands for rhine"""
 
+import common
 import os
 
 TARGET_DIR = os.getenv('OUT')
 TARGET_DEVICE = os.getenv('CM_BUILD')
+
+def FullOTA_InstallBegin(self):
+  fstab = common.OPTIONS.info_dict["fstab"]
+  if fstab:
+    p = fstab["/data"]
+    self.output_zip.write(os.path.join(TARGET_DIR, "fix_data.sh"), "fix_data.sh")
+    self.script.AppendExtra('package_extract_file("fix_data.sh", "/tmp/fix_data.sh");')
+    self.script.AppendExtra('set_perm(0, 0, 0777, "/tmp/fix_data.sh");')
+    self.script.AppendExtra('run_program("/tmp/fix_data.sh");')
+    self.script.AppendExtra('sha1_check(read_file("/tmp/fix_data"),"fb360f9c09ac8c5edb2f18be5de4e80ea4c430d0") && format("%s", "%s", "%s", "%s", "%s");' % (p.fs_type, common.PARTITION_TYPES[p.fs_type], p.device, p.length, p.mount_point))
 
 def FullOTA_InstallEnd(self):
   if TARGET_DEVICE == "honami" or TARGET_DEVICE == "togari":
