@@ -240,23 +240,11 @@ on boot
     # an ack packet comes out of order
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
 
-    # NFC local data and nfcee xml storage
-    mkdir /data/nfc 0770 nfc nfc
-    mkdir /data/nfc/param 0770 nfc nfc
-
     # Set the console loglevel to < KERN_INFO
     # Set the default message loglevel to KERN_INFO
     write /proc/sys/kernel/printk "6 6 1 7"
 
-# QCOM Sensors
     insmod /system/lib/modules/adsprpc.ko
-    mkdir /data/system 0775 system system
-    mkdir /data/system/sensors 0775 system system
-    mkdir /data/misc/sensors 0775 system system
-    write /data/system/sensors/settings 1
-    chmod 664 /data/system/sensors/settings
-    chown system /data/system/sensors/settings
-    start sensors
 
     chown system /sys/devices/virtual/timed_output/vibrator/vtg_level
 
@@ -302,6 +290,18 @@ on post-fs-data
     chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
     chmod 0664 /sys/devices/platform/msm_sdcc.3/polling
     chmod 0664 /sys/devices/platform/msm_sdcc.4/polling
+
+    # NFC local data and nfcee xml storage
+    mkdir /data/nfc 0770 nfc nfc
+    mkdir /data/nfc/param 0770 nfc nfc
+
+    # QCOM Sensors
+    mkdir /data/system 0775 system system
+    mkdir /data/system/sensors 0775 system system
+    mkdir /data/misc/sensors 0775 system system
+    write /data/system/sensors/settings 1
+    chmod 664 /data/system/sensors/settings
+    chown system /data/system/sensors/settings
 
     # Chown polling nodes as needed from UI running on system server
     chown system system /sys/devices/platform/msm_sdcc.1/polling
@@ -659,7 +659,6 @@ service sensors /system/bin/sensors.qcom
     class main
     user root
     group root
-    disabled
 
 service wcnss-service /system/bin/wcnss_service
     class late_start
