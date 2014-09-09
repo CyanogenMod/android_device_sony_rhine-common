@@ -94,6 +94,16 @@ on fs
     class_start sony_ta
     exec /sbin/wait4tad_static
     exec /system/bin/taimport
+    chown bluetooth bluetooth /data/etc/bluetooth_bdaddr
+    chmod 0640 /data/etc/bluetooth_bdaddr
+    chown wifi wifi /data/etc/wlan_macaddr0
+    chmod 0640 /data/etc/wlan_macaddr0
+    chown wifi wifi /data/etc/wlan_macaddr1
+    chmod 0640 /data/etc/wlan_macaddr1
+    chown wifi wifi /data/etc/wlan_macaddr2
+    chmod 0640 /data/etc/wlan_macaddr2
+    chown wifi wifi /data/etc/wlan_macaddr3
+    chmod 0640 /data/etc/wlan_macaddr3
 
     restorecon -R /data/etc
 
