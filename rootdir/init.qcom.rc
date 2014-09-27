@@ -686,6 +686,9 @@ service setup_fs /system/bin/setup_fs /dev/block/platform/msm_sdcc.1/by-name/use
     group root
     oneshot
 
+service charger /charger
+    class charger
+
 on property:init.svc.surfaceflinger=running
     start ppd
 
