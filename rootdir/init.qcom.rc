@@ -169,6 +169,10 @@ on boot
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
 
+    # MDP idle notifier
+    chown system graphics /sys/class/graphics/fb0/idle_time
+    chmod 0664 /sys/class/graphics/fb0/idle_time
+
     # Remove write permissions to video related nodes
     chown system graphics /sys/class/graphics/fb1/hpd
     chown system system /sys/class/graphics/fb1/hdcp/tp
