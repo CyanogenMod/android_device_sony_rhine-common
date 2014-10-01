@@ -243,10 +243,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # MDP
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.mdpcomp.maxpermixer=3 \
-    debug.mdpcomp.mixedmode.disable=1
-    debug.mdpcomp.logs=0 \
-    debug.mdpcomp.4k2kSplit=true
+    debug.mdpcomp.logs=0
 
 # Radio
 ifneq ($(BOARD_HAVE_RADIO),false)
