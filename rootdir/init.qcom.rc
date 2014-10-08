@@ -200,6 +200,10 @@ on boot
     chmod 400 /sys/class/graphics/fb1/msm_fb_fps_level
     chmod 400 /sys/class/graphics/fb2/msm_fb_fps_level
 
+    # Adaptive backlight
+    chown system system /sys/devices/mdss_dsi_panel/cabc
+    chmod 0660 /sys/devices/mdss_dsi_panel/cabc
+
     # For bridgemgr daemon to inform the USB driver of the correct transport
     chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
 
