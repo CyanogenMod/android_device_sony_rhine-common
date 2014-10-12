@@ -102,6 +102,9 @@ MAX_EGL_CACHE_SIZE := 2048*1024
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_rhine
 
+# RIL
+BOARD_HAS_RIL_LEGACY_PAP := true
+
 # SELinux
 BOARD_SEPOLICY_DIRS += \
     device/sony/rhine-common/sepolicy
