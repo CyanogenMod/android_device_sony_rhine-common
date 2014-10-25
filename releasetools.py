@@ -24,5 +24,5 @@ def FullOTA_InstallEnd(self):
   if TARGET_DEVICE == "honami" or TARGET_DEVICE == "togari":
     self.output_zip.write(os.path.join(TARGET_DIR, "c6x02.sh"), "c6x02.sh")
     self.script.AppendExtra('package_extract_file("c6x02.sh", "/tmp/c6x02.sh");')
-    self.script.AppendExtra('set_perm(0, 0, 0777, "/tmp/c6x02.sh");')
+    self.script.AppendExtra('set_metadata("/tmp/c6x02.sh", "uid", 0, "gid", 0, "mode", 0755);')
     self.script.AppendExtra('run_program("/tmp/c6x02.sh");')
