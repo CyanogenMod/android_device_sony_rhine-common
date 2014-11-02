@@ -17,8 +17,8 @@ include device/sony/common/BoardConfigCommon.mk
 
 BOARD_EGL_CFG := device/sony/rhine-common/rootdir/system/lib/egl/egl.cfg
 
-# inherit from qcom-common
-include device/sony/qcom-common/BoardConfigCommon.mk
+# inherit from msm8974-common
+include device/sony/msm8974-common/BoardConfigCommon.mk
 
 TARGET_SPECIFIC_HEADER_PATH := device/sony/rhine-common/include
 
