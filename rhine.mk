@@ -14,8 +14,8 @@
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
-# qcom common
-$(call inherit-product, device/sony/qcom-common/qcom-common.mk)
+# inherit from msm8974-common
+$(call inherit-product, device/sony/msm8974-common/msm8974.mk)
 
 COMMON_PATH := device/sony/rhine-common
 
