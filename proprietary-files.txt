@@ -247,7 +247,6 @@ etc/pre_hw_config.sh
 
 # IRSC
 bin/irsc_util
-etc/sec_config
 
 # Keylayout
 usr/keylayout/gpio-keys.kl

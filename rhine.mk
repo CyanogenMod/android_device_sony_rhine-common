@@ -119,6 +119,10 @@ PRODUCT_PACKAGES += \
     com.qualcomm.location \
     gps.msm8974
 
+# IPC Security Config
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/system/etc/sec_config:system/etc/sec_config
+
 # Keystore
 PRODUCT_PACKAGES += \
     keystore.msm8974
