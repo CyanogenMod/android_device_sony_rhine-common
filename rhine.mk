@@ -268,5 +268,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.debug.wfd.enable=1 \
     persist.sys.wfd.virtual=0
 
+# IPC Security Config
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/system/etc/sec_config:system/etc/sec_config
+
 # Include non-opensource parts
 $(call inherit-product, vendor/sony/rhine-common/rhine-common-vendor.mk)
