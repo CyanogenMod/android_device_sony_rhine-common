@@ -20,7 +20,7 @@ BOARD_EGL_CFG := device/sony/rhine-common/rootdir/system/lib/egl/egl.cfg
 # inherit from msm8974-common
 include device/sony/msm8974-common/BoardConfigCommon.mk
 
-TARGET_SPECIFIC_HEADER_PATH := device/sony/rhine-common/include
+TARGET_SPECIFIC_HEADER_PATH += device/sony/rhine-common/include
 
 # Kernel properties
 TARGET_KERNEL_SOURCE := kernel/sony/msm8974
