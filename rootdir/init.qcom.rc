@@ -644,11 +644,11 @@ service ta_qmi_service /system/bin/ta_qmi_service
     user root
     class main
 
-# Start system_monitor
-service system_monitor /system/bin/system_monitor
-    socket sysmon stream 0660 root system
-    class core
+# Thermal Manager service
+service thermanager /system/bin/thermanager /system/etc/thermanager.xml
+    class main
     user root
+    group root
 
 service rmt_storage /system/bin/rmt_storage
     class core

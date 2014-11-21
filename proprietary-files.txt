@@ -54,9 +54,12 @@ lib/hw/camera.qcom.so:lib/hw/camera.vendor.qcom.so
 lib/libals.so
 lib/libcamera_clientsemc.so
 lib/libcammw.so
+lib/liblights-core.so
 lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
+lib/libprotobuf-c.so
 lib/libqomx_core.so
+lib/libsys-utils.so
 vendor/lib/libfastcvopt.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegehw.so
@@ -378,46 +381,6 @@ bin/clearpad_fwloader
 # Sensors
 vendor/lib/hw/sensors.msm8974.so
 vendor/lib/libsensor_reg.so
-
-# Sysmon
-bin/system_monitor
-lib/liblights-core.so
-lib/libprotobuf-c.so
-lib/libsysmon_idd.so
-lib/libsysmon.so
-lib/libsys-utils.so
-lib/sysmon/sysmon_batt_therm.so
-lib/sysmon/sysmon_charge_current_limit_level.so
-lib/sysmon/sysmon_charging.so
-lib/sysmon/sysmon_corelimit.so
-lib/sysmon/sysmon_dc_current_limit_value.so
-lib/sysmon/sysmon_emmc_therm.so
-lib/sysmon/sysmon_gpu_perflevel.so
-lib/sysmon/sysmon_lcd_brightness_level.so
-lib/sysmon/sysmon_modem_8974.so
-lib/sysmon/sysmon_msm_thermal_disable.so
-lib/sysmon/sysmon_msm_therm.so
-lib/sysmon/sysmon_pa_therm0.so
-lib/sysmon/sysmon_pa_therm1.so
-lib/sysmon/sysmon_perflevel.so
-lib/sysmon/sysmon_pm8941_tz.so
-lib/sysmon/sysmon_quiet_therm.so
-lib/sysmon/sysmon_test_sensor.so
-lib/sysmon/sysmon_tsens_interrupt.so
-lib/sysmon/sysmon_tsens_tz_sensor0.so
-lib/sysmon/sysmon_tsens_tz_sensor10.so
-lib/sysmon/sysmon_tsens_tz_sensor1.so
-lib/sysmon/sysmon_tsens_tz_sensor2.so
-lib/sysmon/sysmon_tsens_tz_sensor3.so
-lib/sysmon/sysmon_tsens_tz_sensor4.so
-lib/sysmon/sysmon_tsens_tz_sensor5.so
-lib/sysmon/sysmon_tsens_tz_sensor6.so
-lib/sysmon/sysmon_tsens_tz_sensor7.so
-lib/sysmon/sysmon_tsens_tz_sensor8.so
-lib/sysmon/sysmon_tsens_tz_sensor9.so
-lib/sysmon/sysmon_usb_current_limit_value.so
-lib/sysmon/sysmon_wlan_limit.so
-lib/sysmon/sysmon_xo_therm.so
 
 # WiFi
 bin/radish
