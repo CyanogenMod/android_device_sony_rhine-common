@@ -36,7 +36,8 @@ TARGET_CPU_VARIANT := krait
 # Flags
 COMMON_GLOBAL_CFLAGS += -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64
 
-# Krait optimizations
+# Bionic
+BOARD_USES_LEGACY_MMAP := true
 TARGET_USE_KRAIT_BIONIC_OPTIMIZATION := true
 
 # Kernel information
