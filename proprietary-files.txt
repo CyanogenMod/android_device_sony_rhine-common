@@ -259,10 +259,6 @@ vendor/firmware/keymaster/keymaster.b02
 vendor/firmware/keymaster/keymaster.b03
 vendor/firmware/keymaster/keymaster.mdt
 
-# Lights
-lib/hw/lights.default.so:lib/hw/lights.vendor.default.so
-lib/liblights-core.so
-
 # Media config
 etc/media_profiles.xml
 
@@ -387,6 +383,7 @@ vendor/lib/libsensor_reg.so
 
 # Sysmon
 bin/system_monitor
+lib/liblights-core.so
 lib/libprotobuf-c.so
 lib/libsysmon_idd.so
 lib/libsysmon.so
