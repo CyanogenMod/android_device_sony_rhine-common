@@ -87,8 +87,6 @@ on fs
     chmod 0555 /lta-label
 
     chmod 0755 /data/etc
-    class_start sony_ta
-    exec /sbin/wait4tad_static
     exec /system/bin/taimport
 
     restorecon -R /data/etc
@@ -98,9 +96,6 @@ on early-boot
     setrlimit 8 67108864 67108864
 
     write /sys/kernel/boot_adsp/boot 1
-
-    start ta_qmi_service
-    start sct_service
 
     # Run pre_hw_config.sh before entering charge only mode.
     exec /system/bin/sh /system/etc/pre_hw_config.sh
@@ -483,12 +478,7 @@ service tad_static /sbin/tad_static /dev/block/mmcblk0 1,16
     user root
     group root
     socket tad stream 0660 system system
-    class sony_ta
-
-service updatemiscta /system/bin/updatemiscta
-    class main
-    user root
-    oneshot
+    class core
 
 service netmgrd /system/bin/netmgrd
     class main
@@ -638,12 +628,12 @@ service scd /system/bin/scd
 # Secure Config Transfer service
 service sct_service /system/bin/sct_service
     user root
-    disabled
+    class main
 
 # Trim Area QMI service
 service ta_qmi_service /system/bin/ta_qmi_service
     user root
-    disabled
+    class main
 
 # Start system_monitor
 service system_monitor /system/bin/system_monitor

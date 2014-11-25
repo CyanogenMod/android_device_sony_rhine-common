@@ -362,7 +362,6 @@ etc/firmware/tzsuntory.mdt
 
 # TA
 bin/taimport
-bin/ta_param_loader
 bin/ta_qmi_service
 lib/libMiscTaAccessor.so
 lib/libmiscta.so
