@@ -43,9 +43,7 @@ etc/firmware/adsp.mdt
 vendor/lib/libadsprpc.so
 
 # Bluetooth
-bin/btnvtool
 bin/hci_qcomm_init
-vendor/lib/libbtnv.so
 
 # Camera
 bin/mm-qcamera-daemon
