@@ -261,6 +261,16 @@ on boot
 
     chown system /sys/devices/virtual/timed_output/vibrator/vtg_level
 
+    # charger
+    chown root system /sys/module/qpnp_charger/parameters/charger_monitor
+    chown root system /sys/class/power_supply/battery/input_current_max
+    chown root system /sys/class/power_supply/battery/input_current_trim
+    chown root system /sys/class/power_supply/battery/voltage_min
+    chmod 0644 /sys/module/qpnp_charger/parameters/charger_monitor
+    chmod 0644 /sys/class/power_supply/battery/input_current_max
+    chmod 0644 /sys/class/power_supply/battery/input_current_trim
+    chmod 0644 /sys/class/power_supply/battery/voltage_min
+
 on post-fs
     exec /system/bin/chargemon
     write /sys/class/power_supply/battery/enable_stop_charging_at_low_battery 1
@@ -691,6 +701,10 @@ service setup_fs /system/bin/setup_fs /dev/block/platform/msm_sdcc.1/by-name/use
     user root
     group root
     oneshot
+
+service charger /sbin/healthd -c
+    class charger
+    seclabel u:r:healthd:s0
 
 on property:init.svc.surfaceflinger=running
     start ppd
