@@ -675,7 +675,7 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
 service sensors /system/bin/sensors.qcom
     class main
     user root
-    group root
+    group sensors radio system
 
 service wcnss-service /system/bin/wcnss_service
     class late_start
