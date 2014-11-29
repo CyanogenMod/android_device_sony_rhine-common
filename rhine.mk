@@ -19,7 +19,7 @@ $(call inherit-product, device/sony/msm8974-common/msm8974.mk)
 
 COMMON_PATH := device/sony/rhine-common
 
-DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay
+#DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -235,12 +235,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # MDP
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.mdpcomp.logs=0
-
-# Radio
-ifneq ($(BOARD_HAVE_RADIO),false)
-    DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay-radio
-    $(call inherit-product, $(COMMON_PATH)/radio.mk)
-endif
 
 # Time
 PRODUCT_PROPERTY_OVERRIDES += \
