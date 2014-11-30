@@ -297,7 +297,6 @@ on post-fs-data
 
     # Update WIFI MAC address
     mkdir /data/misc/wifi/prima 0775 wifi wifi
-    exec /system/bin/mac-update
 
     mkdir /data/credmgr 0700 system system
     mkdir /data/tombstones 0755 system system
@@ -462,9 +461,9 @@ on property:service.bootanim.exit=1
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
 
-# Update WIFI MAC address
+# Update Wi-Fi MAC address
 service mac-update /system/bin/mac-update
-    class main
+    class late_start
     user wifi
     oneshot
 
