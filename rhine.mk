@@ -154,6 +154,7 @@ PRODUCT_PACKAGES += \
 
 # WiFi
 PRODUCT_PACKAGES += \
+    hostapd_default.conf \
     mac-update \
     wcnss_service
 
