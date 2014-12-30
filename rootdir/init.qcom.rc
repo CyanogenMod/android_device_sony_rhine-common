@@ -503,20 +503,7 @@ service gsiff_daemon /system/bin/gsiff_daemon
     user gps
     group gps net_raw misc
 
-service qrngd /system/bin/qrngd -f
-    class main
-    user root
-    group root
-
-service qrngp /system/bin/qrngp
-    class main
-    user root
-    group root
-    oneshot
-    disabled
-
 on property:sys.boot_completed=1
-    start qrngp
     write /sys/block/mmcblk0/bdi/read_ahead_kb 512
 
 service qseecomd /system/bin/qseecomd
