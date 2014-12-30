@@ -119,11 +119,6 @@ endif
 PRODUCT_COPY_FILES += \
     $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml
 
-# Qualcomm Random Number Generator
-PRODUCT_PACKAGES += \
-    qrngd \
-    qrngp
-
 # USB
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
