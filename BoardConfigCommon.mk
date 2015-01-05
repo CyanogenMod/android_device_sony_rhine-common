@@ -55,6 +55,10 @@ TARGET_INIT_VENDOR_LIB := libinit_rhine
 # RIL
 BOARD_HAS_RIL_LEGACY_PAP := true
 
+# SELinux
+BOARD_SEPOLICY_DIRS += \
+    device/sony/rhine-common/sepolicy
+
 # Wifi
 BOARD_HAS_QCOM_WLAN              := true
 BOARD_WLAN_DEVICE                := qcwcn
