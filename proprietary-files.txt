@@ -248,11 +248,6 @@ etc/pre_hw_config.sh
 # IRSC
 bin/irsc_util
 
-# Keylayout
-usr/keylayout/gpio-keys.kl
-usr/keylayout/mhl-rcp.kl
-usr/keylayout/msm8974-taiko-mtp-snd-card_Button_Jack.kl
-
 # Keystore
 vendor/firmware/keymaster/keymaster.b00
 vendor/firmware/keymaster/keymaster.b01
