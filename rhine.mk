@@ -98,6 +98,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     keystore.msm8974
 
+# Keylayout
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/system/usr/keylayout/gpio-keys.kl:system/system/usr/keylayout/gpio-keys.kl \
+    $(COMMON_PATH)/rootdir/system/usr/keylayout/mhl-rcp.kl:system/system/usr/keylayout/mhl-rcp.kl \
+    $(COMMON_PATH)/rootdir/system/usr/keylayout/msm8974-taiko-mtp-snd-card_Button_Jack.kl:system/system/usr/keylayout/msm8974-taiko-mtp-snd-card_Button_Jack.kl
+
 # NFC
 PRODUCT_PACKAGES += \
     libnfc \
