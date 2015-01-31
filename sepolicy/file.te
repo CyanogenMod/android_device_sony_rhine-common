@@ -1,2 +1,1 @@
-type sysfs_display, fs_type, sysfs_type;
 type sysfs_vibrator, fs_type, sysfs_type;
