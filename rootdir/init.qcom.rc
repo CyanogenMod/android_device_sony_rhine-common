@@ -86,8 +86,6 @@ on fs
     chown system system /lta-label
     chmod 0555 /lta-label
 
-    chmod 0755 /data/etc
-
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
@@ -370,6 +368,9 @@ on post-fs-data
     chown media camera /sys/devices/sony_camera_1/info
     chmod 0770 /sys/devices/sony_camera_1/info
 
+    # Used by taimport for MAC addresses
+    mkdir /data/etc
+
 on charger
     # Enable Power modes and set the CPU Freq Sampling rates
     write /sys/module/lpm_levels/enable_low_power/l2 4
@@ -488,10 +489,9 @@ service tad_static /system/bin/tad_static /dev/block/mmcblk0 1,16
     class core
 
 service taimport /system/bin/taimport
-    class late_start
+    class main
     user root
     group system
-    oneshot
 
 service netmgrd /system/bin/netmgrd
     class main
