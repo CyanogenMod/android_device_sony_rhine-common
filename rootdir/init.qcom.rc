@@ -87,9 +87,6 @@ on fs
     chmod 0555 /lta-label
 
     chmod 0755 /data/etc
-    exec /system/bin/taimport
-
-    restorecon -R /data/etc
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -489,6 +486,12 @@ service tad_static /system/bin/tad_static /dev/block/mmcblk0 1,16
     group root
     socket tad stream 0660 system system
     class core
+
+service taimport /system/bin/taimport
+    class late_start
+    user root
+    group system
+    oneshot
 
 service netmgrd /system/bin/netmgrd
     class main
