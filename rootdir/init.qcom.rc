@@ -611,7 +611,7 @@ service bugreport /system/bin/dumpstate -d -p -B \
 service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
     class late_start
     user root
-    group system qcom_oncrpc
+    group system
     disabled
     oneshot
 
