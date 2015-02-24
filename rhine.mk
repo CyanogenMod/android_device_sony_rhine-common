@@ -76,6 +76,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/system/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh
 
+PRODUCT_PACKAGES += \
+    qcom.fmradio \
+    libqcomfm_jni \
+    FM2 \
+    FMRecord
+
 # GPS
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/gps/flp.conf:system/etc/flp.conf \
@@ -196,6 +202,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.bt.hci_transport=smd
+
+# FM Radio
+PRODUCT_PROPERTY_OVERRIDES += \
+    hw.fm.internal_antenna=true
 
 # GPS
 PRODUCT_PROPERTY_OVERRIDES += \
