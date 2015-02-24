@@ -230,11 +230,8 @@ vendor/lib/libWVStreamControlAPI_L3.so
 vendor/lib/drm/libdrmwvmplugin.so
 vendor/lib/mediadrm/libwvdrmengine.so
 
-# FM
-bin/fmconfig
+# FM Radio
 bin/fm_qsoc_patches
-lib/libfmradio.so
-lib/libfmradio.sony-iris.so
 
 # GPS
 -app/com.qualcomm.location.apk:priv-app/com.qualcomm.location/com.qualcomm.location.apk

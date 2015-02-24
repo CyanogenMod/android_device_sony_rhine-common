@@ -74,7 +74,13 @@ PRODUCT_PACKAGES += \
 
 # FM Radio
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/rootdir/system/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh
+     $(COMMON_PATH)/rootdir/system/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh
+
+PRODUCT_PACKAGES += \
+    qcom.fmradio \
+    libqcomfm_jni \
+    FM2 \
+    FMRecord
 
 # GPS
 PRODUCT_COPY_FILES += \
