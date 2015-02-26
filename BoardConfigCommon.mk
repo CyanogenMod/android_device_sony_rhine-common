@@ -41,7 +41,7 @@ BOARD_CAMERA_HAVE_ISO := true
 USE_DEVICE_SPECIFIC_CAMERA := true
 
 # CM Hardware
-BOARD_HARDWARE_CLASS := device/sony/rhine-common/cmhw
+BOARD_HARDWARE_CLASS += device/sony/rhine-common/cmhw
 
 # Dumpstate
 BOARD_LIB_DUMPSTATE := libdumpstate.sony

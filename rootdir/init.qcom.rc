@@ -267,6 +267,9 @@ on boot
     chmod 0644 /sys/class/power_supply/battery/input_current_trim
     chmod 0644 /sys/class/power_supply/battery/voltage_min
 
+    chown system system /sys/devices/virtual/graphics/fb0/rgb
+    chmod 0660 /sys/devices/virtual/graphics/fb0/rgb
+
 on post-fs
     exec /system/bin/chargemon
     write /sys/class/power_supply/battery/enable_stop_charging_at_low_battery 1
