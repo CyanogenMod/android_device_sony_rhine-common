@@ -327,11 +327,6 @@ etc/firmware/cmnlib.b02
 etc/firmware/cmnlib.b03
 etc/firmware/cmnlib.mdt
 
-# Postproc
-bin/mm-pp-daemon
-vendor/lib/libmm-abl-oem.so
-vendor/lib/libmm-abl.so
-
 # QMI
 vendor/lib/libqcci_legacy.so
 vendor/lib/libqdi.so

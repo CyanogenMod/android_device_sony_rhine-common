@@ -645,13 +645,6 @@ service irsc_util /system/bin/irsc_util "/etc/sec_config"
     user root
     oneshot
 
-service ppd /system/bin/mm-pp-daemon
-    class late_start
-    user system
-    socket pps stream 0660 system system
-    group system graphics qcom_diag
-    disabled
-
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
     user camera
@@ -690,12 +683,6 @@ service setup_fs /system/bin/setup_fs /dev/block/platform/msm_sdcc.1/by-name/use
 service charger /sbin/healthd -c
     class charger
     seclabel u:r:healthd:s0
-
-on property:init.svc.surfaceflinger=running
-    start ppd
-
-on property:init.svc.surfaceflinger=stopped
-    stop ppd
 
 # Powersave
 on property:sys.perf.profile=0
