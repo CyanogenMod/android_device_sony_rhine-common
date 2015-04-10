@@ -211,7 +211,6 @@ etc/firmware/venus.mdt
 # CPU
 bin/mpdecision
 vendor/lib/libthermalclient.so
-vendor/lib/libqc-opt.so
 
 # DRM
 bin/qseecomd
