@@ -208,10 +208,6 @@ etc/firmware/venus.b04
 etc/firmware/venus.mbn
 etc/firmware/venus.mdt
 
-# CPU
-bin/mpdecision
-vendor/lib/libthermalclient.so
-
 # DRM
 bin/qseecomd
 etc/permissions/com.google.widevine.software.drm.xml
