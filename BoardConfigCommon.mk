@@ -62,6 +62,9 @@ BOARD_HAS_RIL_LEGACY_PAP := true
 BOARD_SEPOLICY_DIRS += \
     device/sony/rhine-common/sepolicy
 
+BOARD_SEPOLICY_UNION += \
+    mac-update.te
+
 # Wifi
 BOARD_HAS_QCOM_WLAN              := true
 BOARD_WLAN_DEVICE                := qcwcn

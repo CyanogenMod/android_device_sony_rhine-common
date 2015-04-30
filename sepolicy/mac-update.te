@@ -1,0 +1,9 @@
+type mac-update, domain;
+type mac-update_exec, exec_type, file_type;
+
+# Started by init
+init_daemon_domain(mac-update)
+
+# For reading and writing the correct MAC address
+allow mac-update wifi_data_file:dir w_dir_perms;
+allow mac-update wifi_data_file:file create_file_perms;
