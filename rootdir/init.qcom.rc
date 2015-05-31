@@ -285,6 +285,10 @@ on post-fs
 
 # msm specific files that need to be created on /data
 on post-fs-data
+    # Used by taimport for MAC addresses
+    mkdir /data/etc
+    start taimport
+
     mkdir /data/media 0770 media_rw media_rw
 
     # Create the directories used by the Wireless subsystem
@@ -376,9 +380,6 @@ on post-fs-data
     chmod 0770 /sys/devices/sony_camera_0/info
     chown media camera /sys/devices/sony_camera_1/info
     chmod 0770 /sys/devices/sony_camera_1/info
-
-    # Used by taimport for MAC addresses
-    mkdir /data/etc
 
 on charger
     # Enable Power modes and set the CPU Freq Sampling rates
@@ -501,6 +502,8 @@ service taimport /system/bin/taimport
     class main
     user root
     group system
+    disabled
+    oneshot
 
 service netmgrd /system/bin/netmgrd
     class main
