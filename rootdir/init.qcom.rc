@@ -501,6 +501,7 @@ service taimport /system/bin/taimport
     class main
     user root
     group system
+    oneshot
 
 service netmgrd /system/bin/netmgrd
     class main
