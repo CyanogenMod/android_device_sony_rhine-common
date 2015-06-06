@@ -288,6 +288,7 @@ on post-fs-data
     # Used by taimport for MAC addresses
     mkdir /data/etc 0755 root shell
     start taimport
+    start mac-update
 
     mkdir /data/media 0770 media_rw media_rw
 
@@ -465,12 +466,6 @@ on property:service.bootanim.exit=1
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
 
-# Update Wi-Fi MAC address
-service mac-update /system/bin/mac-update
-    class late_start
-    user wifi
-    oneshot
-
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     class late_start
     user bluetooth
@@ -502,6 +497,13 @@ service taimport /system/bin/taimport
     class main
     user root
     group system
+    disabled
+    oneshot
+
+# Update Wi-Fi MAC address
+service mac-update /system/bin/mac-update
+    class main
+    user wifi
     disabled
     oneshot
 
