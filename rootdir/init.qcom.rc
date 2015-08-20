@@ -287,8 +287,8 @@ on post-fs
 on post-fs-data
     # Used by taimport for MAC addresses
     mkdir /data/etc 0755 root shell
+    start tad_static
     start taimport
-    start mac-update
 
     mkdir /data/media 0770 media_rw media_rw
 
@@ -300,14 +300,15 @@ on post-fs-data
     # to observe dnsmasq.leases file for dhcp information of soft ap.
     chown dhcp dhcp /data/misc/dhcp
 
-    # Update WIFI MAC address
-    mkdir /data/misc/wifi/prima 0775 wifi wifi
-
     mkdir /data/credmgr 0700 system system
     mkdir /data/tombstones 0755 system system
     mkdir /data/tombstones/vendor 0755 system system
     mkdir /data/pc 0700 radio radio
     mkdir /data/persist 0770 system system
+
+    # Update WIFI MAC address
+    mkdir /data/misc/wifi/prima 0775 wifi wifi
+    start mac-update
 
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
