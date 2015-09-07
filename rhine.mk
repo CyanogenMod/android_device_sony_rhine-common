@@ -98,6 +98,9 @@ PRODUCT_PACKAGES += \
 
 # NFC
 PRODUCT_PACKAGES += \
+    nfc.qcom
+
+PRODUCT_PACKAGES += \
     libnfc \
     libnfc_jni \
     Nfc \
