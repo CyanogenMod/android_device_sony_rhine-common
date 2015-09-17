@@ -598,13 +598,6 @@ service ptt_socket_app /system/bin/ptt_socket_app
     group system
     oneshot
 
-# create filesystem if necessary
-service setup_fs /system/bin/setup_fs /dev/block/platform/msm_sdcc.1/by-name/userdata
-    class core
-    user root
-    group root
-    oneshot
-
 service charger /sbin/healthd -c
     class charger
     seclabel u:r:healthd:s0
