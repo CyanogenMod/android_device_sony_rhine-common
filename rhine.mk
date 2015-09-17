@@ -220,10 +220,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.mdpcomp.logs=0
 
-# IO Scheduler
-PRODUCT_PROPERTY_OVERRIDES += \
-    sys.io.scheduler=row
-
 # Time
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.timed.enable=true
