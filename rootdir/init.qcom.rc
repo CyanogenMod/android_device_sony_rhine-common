@@ -283,8 +283,6 @@ on post-fs
 on post-fs-data
     # Used by taimport for MAC addresses
     mkdir /data/etc 0755 root shell
-    start taimport
-    start mac-update
 
     mkdir /data/media 0770 media_rw media_rw
 
@@ -409,18 +407,20 @@ service tad_static /system/bin/tad_static /dev/block/mmcblk0 1,16
     class core
 
 service taimport /system/bin/taimport
-    class main
+    class late_start
     user root
     group system
-    disabled
     oneshot
 
 # Update Wi-Fi MAC address
 service mac-update /system/bin/mac-update
-    class main
+    class late_start
     user wifi
     disabled
     oneshot
+
+on service-exited-taimport
+    start mac-update
 
 service netmgrd /system/bin/netmgrd
     class main
