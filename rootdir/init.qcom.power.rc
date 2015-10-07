@@ -70,8 +70,6 @@ on enable-low-power
 
     write /dev/cpuctl/cpu.notify_on_migrate 1
 
-    start mpdecision
-
 on charger
     write /sys/module/lpm_levels/enable_low_power/l2 2
     write /sys/module/msm_pm/modes/cpu0/power_collapse/suspend_enabled 1
@@ -96,7 +94,7 @@ on charger
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
 
-on class_start:late_start
+on boot
     trigger enable-low-power
 
 on property:init.svc.recovery=running
