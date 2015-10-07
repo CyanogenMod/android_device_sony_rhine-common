@@ -601,3 +601,8 @@ service ptt_socket_app /system/bin/ptt_socket_app
 service charger /sbin/healthd -c
     class charger
     seclabel u:r:healthd:s0
+
+service audiod /system/bin/audiod
+    class late_start
+    user system
+    group system
