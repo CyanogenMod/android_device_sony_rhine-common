@@ -123,10 +123,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     charger_res_images
 
-# USB
-PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory
-
 # WiFi
 PRODUCT_PACKAGES += \
     libQWiFiSoftApCfg \
