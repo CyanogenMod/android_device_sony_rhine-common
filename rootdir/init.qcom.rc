@@ -416,7 +416,6 @@ service taimport /system/bin/taimport
 service mac-update /system/bin/mac-update
     class late_start
     user wifi
-    disabled
     oneshot
 
 on service-exited-taimport
