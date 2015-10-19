@@ -24,7 +24,7 @@
 
 #include <sys/system_properties.h>
 
-static void import_kernel_nv(char *name)
+static void import_kernel_nv(char *name, __attribute__((unused)) bool foo)
 {
     char *value = strchr(name, '=');
     int name_len = strlen(name);
