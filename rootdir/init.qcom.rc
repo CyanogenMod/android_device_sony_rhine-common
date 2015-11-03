@@ -281,8 +281,6 @@ on post-fs
 
 # msm specific files that need to be created on /data
 on post-fs-data
-    # Used by taimport for MAC addresses
-    mkdir /data/etc 0755 root shell
 
     mkdir /data/media 0770 media_rw media_rw
 
@@ -293,9 +291,6 @@ on post-fs-data
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     # to observe dnsmasq.leases file for dhcp information of soft ap.
     chown dhcp dhcp /data/misc/dhcp
-
-    # Update WIFI MAC address
-    mkdir /data/misc/wifi/prima 0775 wifi wifi
 
     mkdir /data/credmgr 0700 system system
     mkdir /data/tombstones 0755 system system
@@ -406,20 +401,11 @@ service tad_static /system/bin/tad_static /dev/block/mmcblk0 1,16
     socket tad stream 0660 system system
     class core
 
-service taimport /system/bin/taimport
+# Wi-Fi and BT MAC addresses
+service macaddrsetup /system/bin/macaddrsetup /sys/devices/fb000000.qcom,wcnss-wlan/wcnss_mac_addr
     class late_start
     user root
-    group system
     oneshot
-
-# Update Wi-Fi MAC address
-service mac-update /system/bin/mac-update
-    class late_start
-    user wifi
-    oneshot
-
-on service-exited-taimport
-    start mac-update
 
 service netmgrd /system/bin/netmgrd
     class main

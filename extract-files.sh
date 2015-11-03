@@ -13,4 +13,4 @@ export TARGET_BOARD_PLATFORM=msm8974
 ../common/extract-files.sh $@
 ../common/setup-makefiles.sh
 
-../${TARGET_BOARD_PLATFORM}-common/setup-makefiles.sh
+./setup-makefiles.sh
