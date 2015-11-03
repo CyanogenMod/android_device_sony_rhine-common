@@ -63,7 +63,7 @@ BOARD_SEPOLICY_DIRS += \
     device/sony/rhine-common/sepolicy
 
 BOARD_SEPOLICY_UNION += \
-    mac-update.te
+    macaddrsetup.te
 
 # Wifi
 BOARD_HAS_QCOM_WLAN              := true

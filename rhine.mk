@@ -109,6 +109,10 @@ PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/rootdir/system/usr/keylayout/mhl-rcp.kl:system/usr/keylayout/mhl-rcp.kl \
     $(COMMON_PATH)/rootdir/system/usr/keylayout/msm8974-taiko-mtp-snd-card_Button_Jack.kl:system/usr/keylayout/msm8974-taiko-mtp-snd-card_Button_Jack.kl
 
+# MAC address - BT and Wi-Fi
+PRODUCT_PACKAGES += \
+    macaddrsetup
+
 # NFC
 PRODUCT_PACKAGES += \
     libnfc \
@@ -142,7 +146,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libQWiFiSoftApCfg \
     libqsap_sdk \
-    mac-update \
     wcnss_service
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -203,7 +206,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.qualcomm.bt.hci_transport=smd
+    ro.qualcomm.bt.hci_transport=smd \
+    ro.bt.bdaddr_path=/data/misc/bluetooth/bdaddr
 
 # GPS
 PRODUCT_PROPERTY_OVERRIDES += \
