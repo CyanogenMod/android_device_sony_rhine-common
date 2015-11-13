@@ -47,7 +47,7 @@ BOARD_HARDWARE_CLASS += device/sony/rhine-common/cmhw
 BOARD_LIB_DUMPSTATE := libdumpstate.sony
 
 # FM Radio
-AUDIO_FEATURE_ENABLED_FM := true
+#AUDIO_FEATURE_ENABLED_FM := true
 
 # GPS
 TARGET_PROVIDES_GPS_LOC_API := true
