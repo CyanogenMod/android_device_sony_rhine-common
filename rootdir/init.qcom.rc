@@ -24,6 +24,8 @@ on early-init
     chown system system /sys/kernel/debug/kgsl/proc
 
 on init
+    export LD_PRELOAD libboringssl-compat.so
+
     # for backwards compatibility
     symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
