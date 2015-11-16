@@ -222,19 +222,12 @@ vendor/lib/libssd.so
 bin/fm_qsoc_patches
 
 # GPS
--app/com.qualcomm.location.apk:priv-app/com.qualcomm.location/com.qualcomm.location.apk
-bin/gsiff_daemon
-etc/permissions/com.qualcomm.location.xml
 lib/libloc_api_v02.so
 lib/libloc_ds_api.so
 vendor/lib/hw/flp.default.so
 vendor/lib/libgeofence.so
 vendor/lib/libizat_core.so
 vendor/lib/liblbs_core.so
-vendor/lib/liblocationservice.so
-vendor/lib/libquipc_os_api.so
-vendor/lib/libquipc_ulp_adapter.so
-vendor/lib/libulp2.so
 
 # HDCP
 etc/firmware/tzhdcp.b00
