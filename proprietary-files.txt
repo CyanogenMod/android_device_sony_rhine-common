@@ -253,20 +253,6 @@ vendor/firmware/keymaster/keymaster.mdt
 # Media config
 etc/media_profiles.xml
 
-# Modem
-bin/netmgrd
-bin/qmuxd
-bin/rmt_storage
-bin/sct_service
-lib/libpin-cache.so
-vendor/lib/libdiag.so
-vendor/lib/libdsi_netctrl.so
-vendor/lib/libdsnetutils.so
-vendor/lib/libdsutils.so
-vendor/lib/libidl.so
-vendor/lib/libnetmgr.so
-vendor/lib/libril-qc-qmi-1.so
-
 # Modem firmware
 etc/firmware/c6x02/mba.b00
 etc/firmware/c6x02/modem.b01
