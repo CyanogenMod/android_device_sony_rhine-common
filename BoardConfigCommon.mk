@@ -57,8 +57,8 @@ TARGET_PROVIDES_GPS_LOC_API := true
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_rhine
 
-# RIL
-BOARD_HAS_RIL_LEGACY_PAP := true
+# RIL - TODO: remove it from msm8974-common
+BOARD_PROVIDES_LIBRIL := false
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \

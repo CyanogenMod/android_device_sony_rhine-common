@@ -266,6 +266,10 @@ vendor/lib/libdsutils.so
 vendor/lib/libidl.so
 vendor/lib/libnetmgr.so
 vendor/lib/libril-qc-qmi-1.so
+vendor/lib/libmdmdetect.so
+vendor/lib/libperipheral_client.so
+vendor/lib/libconfigdb.so
+vendor/lib/libxml.so
 
 # Modem firmware
 etc/firmware/c6x02/mba.b00
