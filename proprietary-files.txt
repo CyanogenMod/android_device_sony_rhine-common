@@ -253,20 +253,6 @@ vendor/firmware/keymaster/keymaster.mdt
 # Media config
 etc/media_profiles.xml
 
-# Modem
-bin/netmgrd
-bin/qmuxd
-bin/rmt_storage
-bin/sct_service
-lib/libpin-cache.so
-vendor/lib/libdiag.so
-vendor/lib/libdsi_netctrl.so
-vendor/lib/libdsnetutils.so
-vendor/lib/libdsutils.so
-vendor/lib/libidl.so
-vendor/lib/libnetmgr.so
-vendor/lib/libril-qc-qmi-1.so
-
 # Modem firmware
 etc/firmware/c6x02/mba.b00
 etc/firmware/c6x02/modem.b01
@@ -304,19 +290,6 @@ etc/firmware/cmnlib.b01
 etc/firmware/cmnlib.b02
 etc/firmware/cmnlib.b03
 etc/firmware/cmnlib.mdt
-
-# QMI
-vendor/lib/libqcci_legacy.so
-vendor/lib/libqdi.so
-vendor/lib/libqdp.so
-vendor/lib/libqmi_cci.so
-vendor/lib/libqmi_client_qmux.so
-vendor/lib/libqmi_common_so.so
-vendor/lib/libqmi_csi.so
-vendor/lib/libqmi_csvt_srvc.so
-vendor/lib/libqmi_encdec.so
-vendor/lib/libqmiservices.so
-vendor/lib/libqmi.so
 
 # Security
 bin/suntrold

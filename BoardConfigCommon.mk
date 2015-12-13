@@ -56,9 +56,6 @@ TARGET_PROVIDES_GPS_LOC_API := true
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_rhine
 
-# RIL
-BOARD_HAS_RIL_LEGACY_PAP := true
-
 # SELinux
 BOARD_SEPOLICY_DIRS += \
     device/sony/rhine-common/sepolicy
