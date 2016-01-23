@@ -67,14 +67,6 @@ vendor/lib/libssd.so
 # FM Radio
 bin/fm_qsoc_patches
 
-# GPS
-lib/libloc_api_v02.so
-lib/libloc_ds_api.so
-vendor/lib/hw/flp.default.so
-vendor/lib/libgeofence.so
-vendor/lib/libizat_core.so
-vendor/lib/liblbs_core.so
-
 # HDCP
 etc/firmware/tzhdcp.b00
 etc/firmware/tzhdcp.b01
