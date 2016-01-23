@@ -346,13 +346,6 @@ on post-fs-data
     mkdir /dev/socket/mpdecision 0770 system system
     chmod 2770 /dev/socket/mpdecision
 
-    # SONY: Camera
-    mkdir /data/camera 0770 media camera
-    chown media camera /sys/devices/sony_camera_0/info
-    chmod 0770 /sys/devices/sony_camera_0/info
-    chown media camera /sys/devices/sony_camera_1/info
-    chmod 0770 /sys/devices/sony_camera_1/info
-
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
 
@@ -524,11 +517,6 @@ service irsc_util /system/bin/irsc_util "/etc/sec_config"
     class main
     user root
     oneshot
-
-service qcamerasvr /system/bin/mm-qcamera-daemon
-    class late_start
-    user camera
-    group camera system inet input
 
 service sensors /system/bin/sensors.qcom
     class main
