@@ -67,6 +67,7 @@ WIFI_DRIVER_FW_PATH_P2P          := "p2p"
 # Filesystem
 BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
 
 # Recovery
 TARGET_RECOVERY_FSTAB := device/sony/rhine-common/rootdir/fstab.qcom
