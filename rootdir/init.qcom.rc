@@ -36,9 +36,6 @@ on init
     mkdir /dev/bus 0755 root root
     mkdir /dev/bus/usb 0755 root root
 
-    # create directory for scd
-    mkdir /dev/socket/scd 0755 system system
-
     # Enable ramdumps from subsystems to dump
     # Should be initialized during init
     write /sys/bus/msm_subsys/devices/subsys0/restart_level "RELATED"
@@ -360,14 +357,14 @@ on property:bluetooth.hciattach=false
     setprop bluetooth.status off
 
 # QMUX must be in multiple groups to support external process connections
-service qmuxd /system/bin/qmuxd
+service qmuxd /system/vendor/bin/qmuxd
     class main
     user radio
     group radio audio bluetooth gps qcom_diag
 
 # SONY: TrimArea Daemon
 # Last 2 args: start block(blk size 128k), number of blocks(partitionsize(kb)/128(kb))
-service tad_static /system/bin/tad_static /dev/block/mmcblk0 1,16
+service tad_static /system/vendor/bin/tad_static /dev/block/bootdevice/by-name/TA 0,16
     user root
     group root
     socket tad stream 0660 system system
@@ -379,7 +376,7 @@ service macaddrsetup /system/bin/macaddrsetup /sys/devices/fb000000.qcom,wcnss-w
     user root
     oneshot
 
-service netmgrd /system/bin/netmgrd
+service netmgrd /system/vendor/bin/netmgrd
     class main
 
 service qseecomd /system/bin/qseecomd
@@ -458,13 +455,6 @@ service mpdecision /system/bin/mpdecision --avg_comp
     user root
     group system
 
-# Start suntrold
-service suntrold /system/bin/suntrold
-    user system
-    group system
-    oneshot
-    class main
-
 # bugreport is triggered by holding down volume down, volume up and power
 service bugreport /system/bin/dumpstate -d -p -B \
         -o /data/data/com.android.shell/files/bugreports/bugreport
@@ -479,18 +469,13 @@ service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
     disabled
     oneshot
 
-service scd /system/bin/scd
-    class main
-    user system
-    group system
-
 # Secure Config Transfer service
-service sct_service /system/bin/sct_service
+service sct_service /system/vendor/bin/sct_service
     user root
     class main
 
 # Trim Area QMI service
-service ta_qmi_service /system/bin/ta_qmi_service
+service ta_qmi_service /system/vendor/bin/ta_qmi_service
     user root
     class main
 
@@ -500,16 +485,16 @@ service thermanager /system/bin/thermanager /system/etc/thermanager.xml
     user root
     group root
 
-service rmt_storage /system/bin/rmt_storage
+service rmt_storage /system/vendor/bin/rmt_storage
     class core
     user root
 
-service irsc_util /system/bin/irsc_util "/etc/sec_config"
+service irsc_util /system/vendor/bin/irsc_util "/etc/sec_config"
     class main
     user root
     oneshot
 
-service sensors /system/bin/sensors.qcom
+service sensors /system/vendor/bin/sensors.qcom
     class main
     user root
     group sensors radio system
@@ -520,11 +505,6 @@ service wcnss-service /system/bin/wcnss_service
     group system wifi
     disabled
     oneshot
-
-service time_daemon /system/bin/time_daemon
-    class late_start
-    user root
-    group root radio qcom_diag
 
 service ptt_socket_app /system/bin/ptt_socket_app
     class main
