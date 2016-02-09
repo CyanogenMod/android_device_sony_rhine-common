@@ -191,10 +191,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.mdpcomp.logs=0
 
-# Time
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.timed.enable=true
-
 # Touchscreen
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.input.noresample=1
