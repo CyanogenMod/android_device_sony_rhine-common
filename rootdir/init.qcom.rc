@@ -512,6 +512,12 @@ service ptt_socket_app /system/bin/ptt_socket_app
     group system
     oneshot
 
+service timekeep /system/bin/timekeep restore
+    class late_start
+    user root
+    group root
+    oneshot
+
 service charger /sbin/healthd -c
     class charger
     seclabel u:r:healthd:s0
