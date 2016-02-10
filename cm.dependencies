@@ -5,6 +5,6 @@
   },
   {
     "repository": "android_device_sony_msm8974-common",
-    "target_path": "device/sony/msm9874-common"
+    "target_path": "device/sony/msm8974-common"
   }
 ]
