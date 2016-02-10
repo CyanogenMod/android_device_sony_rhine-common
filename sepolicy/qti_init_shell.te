@@ -1,0 +1,6 @@
+# TA daemon
+allow qti_init_shell tad_socket:sock_file write;
+
+# Wifi
+allow qti_init_shell wcnss_device:chr_file { open write };
+allow qti_init_shell wifi_data_file:dir search;
