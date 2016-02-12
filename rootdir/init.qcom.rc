@@ -324,6 +324,9 @@ on post-fs-data
 
     mkdir /data/audio 0770 media audio
 
+    # QCOM camera stack
+    mkdir /data/misc/camera 0770 camera camera
+
     # Enable Power save functionality for modem
     setprop persist.radio.add_power_save 1
 
@@ -523,3 +526,9 @@ service audiod /system/bin/audiod
     class late_start
     user system
     group system
+
+# Camera
+service qcamerasvr /system/vendor/bin/mm-qcamera-daemon
+    class late_start
+    user camera
+    group camera system inet input graphics
