@@ -182,7 +182,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.bt.hci_transport=smd \
-    ro.bt.bdaddr_path=/data/misc/bluetooth/bdaddr
+    ro.bt.bdaddr_path=/data/etc/bluetooth_bdaddr
 
 # HDMI
 PRODUCT_PROPERTY_OVERRIDES += \

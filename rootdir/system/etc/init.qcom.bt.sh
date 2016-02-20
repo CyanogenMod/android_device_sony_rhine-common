@@ -32,7 +32,7 @@ TRANSPORT=`getprop ro.qualcomm.bt.hci_transport`
 logi "Transport : $TRANSPORT"
 
 #load bd addr
-BDADDR=`cat /data/misc/bluetooth/bdaddr`
+BDADDR=`cat /data/etc/bluetooth_bdaddr`
 
 setprop bluetooth.status off
 

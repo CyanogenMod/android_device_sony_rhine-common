@@ -1,5 +1,4 @@
 # Hardware tunables
 /sys/devices/virtual/timed_output/vibrator/vtg_level   -- u:object_r:sysfs_vibrator:s0
 
-/system/bin/macaddrsetup                 u:object_r:macaddrsetup_exec:s0
 /sys/devices/fb000000.qcom,wcnss-wlan/wcnss_mac_addr    u:object_r:sysfs_wlanmac:s0
