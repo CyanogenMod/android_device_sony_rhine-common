@@ -69,14 +69,14 @@ PRODUCT_PACKAGES += \
     e2fsck
 
 # FM Radio
-#PRODUCT_COPY_FILES += \
-#    $(COMMON_PATH)/rootdir/system/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/rootdir/system/etc/init.qcom.fm.sh:system/etc/init.qcom.fm.sh
 
-#PRODUCT_PACKAGES += \
-#    qcom.fmradio \
-#    libqcomfm_jni \
-#    FM2 \
-#    FMRecord
+PRODUCT_PACKAGES += \
+    qcom.fmradio \
+    libqcomfm_jni \
+    FM2 \
+    FMRecord
 
 # IPC Security Config
 PRODUCT_COPY_FILES += \
