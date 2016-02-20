@@ -24,6 +24,13 @@ on early-init
     chown system system /sys/kernel/debug/kgsl/proc
 
 on init
+    # Enable subsystem restart
+    write /sys/module/subsystem_restart/parameters/enable_ramdumps 0
+    write /sys/bus/msm_subsys/devices/subsys0/restart_level "RELATED"
+    write /sys/bus/msm_subsys/devices/subsys1/restart_level "RELATED"
+    write /sys/bus/msm_subsys/devices/subsys2/restart_level "RELATED"
+    write /sys/bus/msm_subsys/devices/subsys3/restart_level "RELATED"
+
     # for backwards compatibility
     symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
@@ -110,6 +117,8 @@ on boot
     chmod 2770 /dev/socket/qmux_bluetooth
     mkdir /dev/socket/qmux_gps 0770 gps gps
     chmod 2770 /dev/socket/qmux_gps
+    mkdir /dev/socket/qmux_nfc 0770 nfc nfc
+    chmod 2770 /dev/socket/qmux_nfc
 
     # Create PERFD deamon related dirs
     mkdir /data/misc/perfd 0755 root system
@@ -359,8 +368,8 @@ on property:bluetooth.hciattach=false
 # QMUX must be in multiple groups to support external process connections
 service qmuxd /system/vendor/bin/qmuxd
     class main
-    user radio
-    group radio audio bluetooth gps qcom_diag
+    user root
+    group radio audio bluetooth gps nfc diag qcom_diag
 
 # SONY: TrimArea Daemon
 # Last 2 args: start block(blk size 128k), number of blocks(partitionsize(kb)/128(kb))
