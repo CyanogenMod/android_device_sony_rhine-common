@@ -388,7 +388,7 @@ service macaddrsetup /system/bin/macaddrsetup /sys/devices/fb000000.qcom,wcnss-w
 service netmgrd /system/vendor/bin/netmgrd
     class main
 
-service qseecomd /system/bin/qseecomd
+service qseecomd /system/vendor/bin/qseecomd
     class core
     user root
     group root
