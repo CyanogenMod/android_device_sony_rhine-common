@@ -155,3 +155,14 @@
 /dev/uio0                 0660   system     system
 /dev/uio1                 0660   system     system
 /dev/uio2                 0660   system     system
+
+# Lights
+/sys/devices/01-qcom,leds-d000/leds/led:*                       max_brightness      0664 system system
+/sys/devices/01-qcom,leds-d000/leds/led:*                       brightness          0664 system system
+/sys/devices/01-qcom,leds-d000/leds/led:*                       blink               0664 system system
+/sys/devices/01-qcom,leds-d000/leds/led:*                       duty_pcts           0664 system system
+/sys/devices/01-qcom,leds-d000/leds/led:*                       ramp_step_ms        0664 system system
+/sys/devices/01-qcom,leds-d800/leds/wled:backlight              max_brightness      0664 system system
+/sys/devices/01-qcom,leds-d800/leds/wled:backlight              brightness          0664 system system
+/sys/devices/mdp.0/qcom,mdss_fb_primary.174/leds/lcd-backlight  brightness          0664 system system
+/sys/devices/mdp.0/qcom,mdss_fb_primary.174/leds/lcd-backlight  max_brightness      0664 system system
