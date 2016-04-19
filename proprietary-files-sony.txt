@@ -1,3 +1,4 @@
+bin/fm_qsoc_patches
 etc/acdbdata/Bluetooth_cal.acdb
 etc/acdbdata/General_cal.acdb
 etc/acdbdata/Global_cal.acdb
