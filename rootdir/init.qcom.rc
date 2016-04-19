@@ -472,12 +472,6 @@ service bugreport /system/bin/dumpstate -d -p -B \
     oneshot
     keycodes 114 115 116
 
-service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
-    user root
-    group system
-    disabled
-    oneshot
-
 # Secure Config Transfer service
 service sct_service /system/vendor/bin/sct_service
     user root
