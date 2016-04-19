@@ -472,8 +472,10 @@ service bugreport /system/bin/dumpstate -d -p -B \
     oneshot
     keycodes 114 115 116
 
+# FM Radio Service
 service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
-    user root
+    class late_start
+    user system
     group system
     disabled
     oneshot
