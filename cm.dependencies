@@ -1,9 +1,5 @@
 [
   {
-    "repository": "android_hardware_qcom_fm",
-    "target_path": "hardware/qcom/fm"
-  },
-  {
     "repository": "android_device_sony_msm8974-common",
     "target_path": "device/sony/msm8974-common"
   }

@@ -42,9 +42,6 @@ BOARD_HARDWARE_CLASS += device/sony/rhine-common/cmhw
 # Dumpstate
 BOARD_LIB_DUMPSTATE := libdumpstate.sony
 
-# FM Radio
-#AUDIO_FEATURE_ENABLED_FM := true
-
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_rhine
 
